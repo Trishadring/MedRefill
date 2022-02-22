@@ -3,7 +3,7 @@ import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 import { Button, Form, Grid, Header, Image, Segment } from "semantic-ui-react";
 
 import userService from "../../utils/userService";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Navigate } from "react-router-dom";
 
 export default function SignUpPage(props) {
 	const [error, setError] = useState('')
