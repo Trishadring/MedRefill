@@ -5,7 +5,9 @@ export default function Feed() {
 return(
 	<>
 	<Nav/>
-	<p>Hello!</p>
+	<p>Add medication</p>
+	<p>Map of meds</p>
+	<p>Link to med 1</p>
 	</>
 )
 
