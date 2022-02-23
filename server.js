@@ -27,11 +27,11 @@ app.use('/api/doctor', require('./routes/api/doctors'));
 app.use('/api/medication', require('./routes/api/medications'));
 // "catch all" route
 app.get('/*', function (req, res) {
-	res.sendFile(path.join(__dirname, 'build', 'index.html'));
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
 
 const port = process.env.PORT || 3001;
 
 app.listen(port, function () {
-	console.log(`Express app listening on port ${port}`);
+  console.log(`Express app listening on port ${port}`);
 });

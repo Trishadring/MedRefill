@@ -6,45 +6,44 @@ import * as medicationApi from "../../utils/medicationApi";
 import { Grid } from "semantic-ui-react";
 
 export default function Feed() {
-	const [meds, setMeds] = useState([]);
-	console.log(meds, "state")
-	async function getMeds() {
-		try {
-			const data = await medicationApi.getAll();
-			setMeds([...data.medication]);
-		} catch (err) {
-			console.log(err.message, " this is the error");
-			// setError(err.message);
-		}
-	}
-	useEffect(() => {
-		getMeds();
-	}, []);
+  const [meds, setMeds] = useState([]);
+  console.log(meds, "state")
+  async function getMeds() {
+    try {
+      const data = await medicationApi.getAll();
+      setMeds([...data.medication]);
+    } catch (err) {
+      console.log(err.message, " this is the error");
+    }
+  }
+  useEffect(() => {
+    getMeds();
+  }, []);
 
-	return (
+  return (
 
-		<Grid centered>
-			<Grid.Row>
-				<Grid.Column>
-					<Nav />
-				</Grid.Column>
-			</Grid.Row>
-			<Grid.Row>
-				<Grid.Column style={{ maxWidth: 450 }}>
-					<AddMedForm />
-				</Grid.Column>
-			</Grid.Row>
-			<Grid.Row>
-				<Grid.Column style={{ maxWidth: 450 }}>
-					<MedFeed medication={meds} />
-				</Grid.Column>
-			</Grid.Row>
-		</Grid>
-
+    <Grid centered>
+      <Grid.Row>
+        <Grid.Column>
+          <Nav />
+        </Grid.Column>
+      </Grid.Row>
+      <Grid.Row>
+        <Grid.Column style={{ maxWidth: 450 }}>
+          <AddMedForm />
+        </Grid.Column>
+      </Grid.Row>
+      <Grid.Row>
+        <Grid.Column style={{ maxWidth: 450 }}>
+          <MedFeed medication={meds} />
+        </Grid.Column>
+      </Grid.Row>
+    </Grid>
 
 
 
 
-	)
+
+  )
 
 }

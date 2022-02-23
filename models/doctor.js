@@ -1,18 +1,18 @@
 const mongoose = require('mongoose');
 
 const DoctorSchema = new mongoose.Schema({
-	name: {
-		type: String,
-		required: true
-	},
-	phoneNum: {
-		type: String,
-		required: true
-	},
-	notes: String,
-	hours: {
-		type: String,
-	}
+  name: {
+    type: String,
+    required: true
+  },
+  phoneNum: {
+    type: String,
+    required: true
+  },
+  notes: String,
+  hours: {
+    type: String,
+  }
 })
 
 

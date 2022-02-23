@@ -9,51 +9,51 @@ import AddProvider from '../AddProvider/AddProvider'
 import Medication from '../Medication/Medication'
 
 function App() {
-	const [user, setUser] = useState(userService.getUser()); // getUser decodes our JWT token, into a javascript object
-	// this object corresponds to the jwt payload which is defined in the server signup or login function that looks like
-	// this  const token = createJWT(user); // where user was the document we created from mongo
+  const [user, setUser] = useState(userService.getUser()); // getUser decodes our JWT token, into a javascript object
+  // this object corresponds to the jwt payload which is defined in the server signup or login function that looks like
+  // this  const token = createJWT(user); // where user was the document we created from mongo
 
-	function handleSignUpOrLogin() {
-		setUser(userService.getUser()); // getting the user from localstorage decoding the jwt
-	}
+  function handleSignUpOrLogin() {
+    setUser(userService.getUser()); // getting the user from localstorage decoding the jwt
+  }
 
-	function handleLogout() {
-		userService.logout();
-		setUser(null);
-	}
+  function handleLogout() {
+    userService.logout();
+    setUser(null);
+  }
 
-	if (user) {
-		return (
-			<Routes>
-				<Route path="/" element={<Feed />} />
-				<Route
-					path="/login"
-					element={<LoginPage handleSignUpOrLogin={handleSignUpOrLogin} />}
-				/>
-				<Route
-					path="/signup"
-					element={<SignupPage handleSignUpOrLogin={handleSignUpOrLogin} />}
-				/>
-				<Route path="/Doctor" element={< AddProvider />} />
-				<Route path="/medication/:medId" element={< Medication />} />
-			</Routes>
-		);
-	}
+  if (user) {
+    return (
+      <Routes>
+        <Route path="/" element={<Feed />} />
+        <Route
+          path="/login"
+          element={<LoginPage handleSignUpOrLogin={handleSignUpOrLogin} />}
+        />
+        <Route
+          path="/signup"
+          element={<SignupPage handleSignUpOrLogin={handleSignUpOrLogin} />}
+        />
+        <Route path="/Doctor" element={< AddProvider />} />
+        <Route path="/medication/:medId" element={< Medication />} />
+      </Routes>
+    );
+  }
 
-	return (
-		<Routes>
-			<Route
-				path="/login"
-				element={<LoginPage handleSignUpOrLogin={handleSignUpOrLogin} />}
-			/>
-			<Route
-				path="/signup"
-				element={<SignupPage handleSignUpOrLogin={handleSignUpOrLogin} />}
-			/>
-			<Route path="/*" element={<Navigate to="/login" />} />
-			<Route path="/Doctor" element={< AddProvider />} />
-		</Routes>
-	);
+  return (
+    <Routes>
+      <Route
+        path="/login"
+        element={<LoginPage handleSignUpOrLogin={handleSignUpOrLogin} />}
+      />
+      <Route
+        path="/signup"
+        element={<SignupPage handleSignUpOrLogin={handleSignUpOrLogin} />}
+      />
+      <Route path="/*" element={<Navigate to="/login" />} />
+      <Route path="/Doctor" element={< AddProvider />} />
+    </Routes>
+  );
 }
 
 export default App;
