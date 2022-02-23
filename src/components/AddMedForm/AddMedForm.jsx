@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Grid, Segment, Button, Header, Form } from 'semantic-ui-react'
+import { Grid, Segment, Button, Header, Form, Icon } from 'semantic-ui-react'
 import * as medicationApi from "../../utils/medicationApi";
 
 
