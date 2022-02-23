@@ -4,7 +4,7 @@ const BASE_URL = '/api/doctor';
 
 export function create(doctor) {
 	console.log(doctor, "doctor")
-	return fetch(`${BASE_URL}/doctor`, { // <- this end point is communicating with the create route in /routes/likes.js on express server
+	return fetch(`${BASE_URL}`, { // <- this end point is communicating with the create route in /routes/likes.js on express server
 		method: 'POST',
 		body: JSON.stringify(doctor),
 		headers: {
@@ -15,6 +15,6 @@ export function create(doctor) {
 		}
 	}).then(res => {
 		if (res.ok) return res.json();
-		throw new Error('Error in creating the like, Check your express terminal!')
+		throw new Error('Error in creating the doctor, Check your express terminal!')
 	})
 }

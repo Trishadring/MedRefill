@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Grid, Segment, Button, Header, Form } from 'semantic-ui-react'
+import * as medicationApi from "../../utils/medicationApi";
 
 
 
@@ -12,7 +13,8 @@ function AddMedForm() {
 		lastFilled: '',
 		perDay: '',
 		cost: '',
-		notes: ''
+		notes: '',
+		qtyPerFill: '',
 	})
 
 	function handleChange(e) {
@@ -24,10 +26,19 @@ function AddMedForm() {
 
 	function handleSubmit(e) {
 		e.preventDefault()
+		const formData = new FormData()
+		for (let key in state) {
+			formData.append(key, state[key])
+		}
 		console.log(state, "state")
-		
-		
 
+		try {
+
+			medicationApi.create(state)
+
+		} catch (err) {
+			console.log(err)
+		}
 	}
 
 	return (
@@ -53,12 +64,15 @@ function AddMedForm() {
 							<Form.Input fluid label='Dosage' placeholder='Dosage' onChange={handleChange}
 								name='dosage'
 								value={state.dosage} />
-							<Form.Input label='Last Filled' type='date'
+							<Form.Input label='Day you run out' type='date'
 								onChange={handleChange}
 								name='lastFilled'
 								value={state.lastFilled} />
 						</Form.Group>
 						<Form.Group widths='equal'>
+							<Form.Input fluid label='# of pills per Refill' placeholder='30' onChange={handleChange}
+								name='qtyPerFill'
+								value={state.qtyPerFill} />
 							<Form.Input fluid label='Pills per Day' placeholder='1 or 2' onChange={handleChange}
 								name='perDay'
 								value={state.perDay} />

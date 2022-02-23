@@ -1,13 +1,18 @@
 import React from "react";
 import MedCard from '../MedCard/MedCard'
+import { Card, Dimmer, Segment, Image } from "semantic-ui-react";
 
 
-function MedFeed() {
+function MedFeed({ medication }) {
+	console.log(medication, "meds on medfeed")
 	return (
-		<>
-			<p>Hello im mapping the array of medication</p>
-			<MedCard/>
-		</>
+		<Card.Group itemsPerRow={1} stackable>
+			{medication.map((medication) => {
+				return (
+					<MedCard  medication={medication} />
+				);
+			})}
+		</Card.Group>
 	)
 }
 

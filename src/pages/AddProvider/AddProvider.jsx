@@ -31,15 +31,9 @@ function AddProvider() {
 		try {
 
 			doctorApi.create(state)
-			// after we signup, we can navigare/and decode our token and set in local storage
-			///props.handleSignUpOrLogin() // <- get the token from localstorage and decode it
-			// and set the user state in the App.js componennt
-			// navigate('/') // < route the user to our home component (all our routes are defined in App.js)
 
 		} catch (err) {
-			// err, is defined in the throw new Error in the 
-			// userServiceSignUp
-			// setError(err.message)
+			console.log(err)
 		}
 
 	}

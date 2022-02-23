@@ -1,26 +1,31 @@
-import tokenService from "./tokenService"
+import tokenService from "./tokenService";
 
-const BASE_URL = '/api/posts/'
+const BASE_URL = '/api/medication';
 
-export function create(postInfoFromTheForm) {
-	// Make a post request to the server
-	return fetch(BASE_URL, {
+export function create(medication) {
+	console.log(medication, "medication")
+	return fetch(`${BASE_URL}`, { // <- this end point is communicating with the create route in /routes/likes.js on express server
 		method: 'POST',
-		body: postInfoFromTheForm, // <- postInfoFromTheForm has to be formData
+		body: JSON.stringify(medication),
 		headers: {
-			'Authorization': 'Bearer ' + tokenService.getToken()
+			'Authorization': 'Bearer ' + tokenService.getToken(),
+			"Content-Type": "application/json",
+			'Accept': 'application/json'
+			// <- the jwt contains the user who is sending the like
 		}
 	}).then(res => {
-		// Valid login if we have a status of 2xx (res.ok)
 		if (res.ok) return res.json();
-		throw new Error('Error submitting the Form! Hey Check the Express Terminal');
+		throw new Error('Error in creating the medication, Check your express terminal!')
 	})
 }
 
 export function getAll() {
+	// console.log('got to line 23 on api')
 	return fetch(BASE_URL, {
 			headers: {
-				'Authorization': 'Bearer ' + tokenService.getToken()
+				'Authorization': 'Bearer ' + tokenService.getToken(),
+				"Content-Type": "application/json",
+				'Accept': 'application/json'
 			}
 		})
 		.then(res => res.json());

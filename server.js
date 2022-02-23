@@ -24,6 +24,7 @@ app.use(require('./config/auth'));
 // api routes must be before the "catch all" route
 app.use('/api/users', require('./routes/api/users'));
 app.use('/api/doctor', require('./routes/api/doctors'));
+app.use('/api/medication', require('./routes/api/medications'));
 // "catch all" route
 app.get('/*', function (req, res) {
 	res.sendFile(path.join(__dirname, 'build', 'index.html'));
