@@ -7,6 +7,7 @@ import { Grid } from "semantic-ui-react";
 
 export default function Feed() {
 	const [meds, setMeds] = useState([]);
+	console.log(meds, "state")
 	async function getMeds() {
 		try {
 			const data = await medicationApi.getAll();
