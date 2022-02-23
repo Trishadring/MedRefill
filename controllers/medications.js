@@ -4,7 +4,8 @@ const Medication = require('../models/medication');
 
 module.exports = {
 	create,
-	index
+	index,
+	getOne
 }
 
 async function create(req, res) {
@@ -22,6 +23,7 @@ async function create(req, res) {
 			refillDate: new Date(med.lastFilled),
 			qtyPerFill: parseInt(med.qtyPerFill),
 			notes: med.notes,
+			user: med.user,
 		}
 		console.log(parsed, "parsed data");
 		const medication = await Medication.create(parsed);
@@ -39,7 +41,7 @@ async function create(req, res) {
 
 async function index(req, res) {
 	// console.log('got to line 41 controller')
-	// console.log(req, "request")
+
 	try {
 		// this populates the user when you find the posts
 		// so you'll have access to the users information
@@ -47,6 +49,27 @@ async function index(req, res) {
 
 		const medication = await Medication.find({});
 		console.log(medication, "meds");
+		res.status(200).json({
+			medication: medication
+		});
+	} catch (err) {
+		console.log(err);
+		res.status(400).json({
+			err
+		})
+	}
+}
+
+async function getOne(req, res) {
+	// console.log('got to line 41 controller')
+	console.log(req.params.id, "request")
+	try {
+		// this populates the user when you find the posts
+		// so you'll have access to the users information
+		// when you fetch teh posts
+
+		const medication = await Medication.findById(req.params.id)
+		console.log(medication, "one med");
 		res.status(200).json({
 			medication: medication
 		});

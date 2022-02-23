@@ -30,3 +30,15 @@ export function getAll() {
 		})
 		.then(res => res.json());
 }
+
+export function getOne(oneMed) {
+	console.log(oneMed, 'medId')
+	return fetch(`${BASE_URL}/${oneMed}`, {
+			headers: {
+				'Authorization': 'Bearer ' + tokenService.getToken(),
+				"Content-Type": "application/json",
+				'Accept': 'application/json'
+			}
+		})
+		.then(res => res.json());
+}
