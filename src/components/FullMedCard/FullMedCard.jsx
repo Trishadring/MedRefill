@@ -23,7 +23,6 @@ function FullMedCard({ medication }) {
         <span>You are out of medication!</span>
       )
     }
-    return final;
   }
   return (
     <Card.Group itemsPerRow={3}>

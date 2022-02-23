@@ -14,7 +14,7 @@ function App() {
   // this  const token = createJWT(user); // where user was the document we created from mongo
 
   function handleSignUpOrLogin() {
-    setUser(userService.getUser()); // getting the user from localstorage decoding the jwt
+    setUser(userService.getUser()); // getting the user from local storage decoding the jwt
   }
 
   function handleLogout() {

@@ -4,7 +4,7 @@ import { Card, Dimmer, Segment, Image } from "semantic-ui-react";
 
 
 function MedFeed({ medication }) {
-  console.log(medication, "meds on medfeed")
+  console.log(medication, "meds on med feed")
   return (
     <Card.Group itemsPerRow={1} stackable>
       {medication.map((medication) => {

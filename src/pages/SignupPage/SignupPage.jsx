@@ -38,7 +38,7 @@ export default function SignUpPage(props) {
 
     for (let fieldName in state) {
       console.log(fieldName, state[fieldName])
-      // append the rest of the data to the form obejct
+      // append the rest of the data to the form object
       formData.append(fieldName, state[fieldName])
     }
 

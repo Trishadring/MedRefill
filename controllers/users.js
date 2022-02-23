@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 const SECRET = process.env.SECRET;
 const { v4: uuidv4 } = require('uuid');
 const S3 = require('aws-sdk/clients/s3');
-const s3 = new S3(); // initialize the construcotr
+const s3 = new S3(); // initialize the constructors
 // now s3 can crud on our s3 buckets
 
 module.exports = {
@@ -18,10 +18,10 @@ function signup(req, res) {
   //////////////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////////////
 
-  // FilePath unique name to be saved to our butckt
+  // FilePath unique name to be saved to our bucket
   const filePath = `${uuidv4()}/${req.file.originalname}`
   const params = {Bucket: process.env.BUCKET_NAME, Key: filePath, Body: req.file.buffer};
-  //your bucket name goes where collectorcat is 
+  //your bucket name goes where collector cat is 
   //////////////////////////////////////////////////////////////////////////////////
   s3.upload(params, async function(err, data){
     console.log(data, 'from aws') // data.Location is our photoUrl that exists on aws
