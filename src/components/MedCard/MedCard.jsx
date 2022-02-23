@@ -4,12 +4,25 @@ import { Card, Icon, Image } from 'semantic-ui-react'
 
 function MedCard({ medication }) {
 	const options = { weekday: 'long', month: 'long', day: 'numeric' };
-	// console.log(medication, "meds on the medcard page")
 	const time = new Date(medication.refillDate);
-	const today = new Date();
-	console.log(today)
 	const newDate = time.toLocaleDateString(undefined, options);
-	console.log(newDate, "new date")
+
+	function howLong() {
+		const today = new Date();
+		const difference = time.getTime() - today.getTime();
+		const daysdiff = difference / (1000 * 3600 * 24);
+		const final = Math.floor(daysdiff);
+		if (final > 1) {
+			return (
+				<span>{final} days until you are out of medication</span>
+			)
+		} else {
+			return (
+				<span>You are out of medication!</span>
+			)
+		}
+		return final;
+	}
 	return (
 		<Card key={medication._id}>
 			<Card.Content>
@@ -23,6 +36,12 @@ function MedCard({ medication }) {
 				<a>
 					<Icon name='calendar outline' />
 					Refill Needed by {newDate}
+				</a>
+			</Card.Content>
+			<Card.Content extra>
+				<a>
+					<Icon name='calendar outline' />
+					{howLong()}
 				</a>
 			</Card.Content>
 		</Card>
