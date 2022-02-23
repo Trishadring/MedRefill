@@ -22,7 +22,7 @@ export default function Feed() {
 			// setError(err.message);
 		}
 	}
-
+	
 	useEffect(() => {
 		getMed();
 	}, []);
@@ -35,7 +35,7 @@ export default function Feed() {
 				</Grid.Column>
 			</Grid.Row>
 			<Grid.Row>
-				<Grid.Column style={{ maxWidth: 800 }}>
+				<Grid.Column >
 					<FullMedCard medication={meds} />
 				</Grid.Column>
 			</Grid.Row>

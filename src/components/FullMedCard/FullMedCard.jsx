@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, Icon, Image, Button } from 'semantic-ui-react'
+import { Card, Icon, Image, Button, Form } from 'semantic-ui-react'
 import { Link } from "react-router-dom";
 
 
@@ -26,37 +26,47 @@ function FullMedCard({ medication }) {
 		return final;
 	}
 	return (
-		<Card key={medication._id} color='red'>
-			<Card.Content>
-				<Card.Header>
-					{medication.medName} {medication.medDose}</Card.Header>
-				<Card.Meta>{medication.medGenericName} {medication.medDose}</Card.Meta>
-				<Card.Description>
-					{medication.notes}
-				</Card.Description>
-			</Card.Content>
-			<Card.Content >
-				<p>
-					Cost: {medication.cost}
-				</p>
-			</Card.Content>
-			<Card.Content >
-				<p>
-					{howLong()}
-				</p>
-			</Card.Content>
-			<Card.Content extra>
-				<p>
-					<Icon name='calendar outline' />
-					Refill Needed by {newDate}
-				</p>
-			</Card.Content>
-			<Card.Content extra>
-				<Button content='Edit' icon='edit outline' labelPosition='right' />
-			</Card.Content>
+		<Card.Group itemsPerRow={3}>
+			<Card key={medication._id} color='red'>
+				<Card.Content>
+					<Card.Header>
+						{medication.medName} {medication.medDose}</Card.Header>
+					<Card.Meta>{medication.medGenericName} {medication.medDose}</Card.Meta>
+					<Card.Description>
+						{medication.notes}
+					</Card.Description>
+				</Card.Content>
+				<Card.Content >
+					<p>
+						Cost: {medication.cost}
+					</p>
+				</Card.Content>
+				<Card.Content extra>
+					<Button content='Edit' icon='edit outline' labelPosition='right' />
+				</Card.Content>
+			</Card >
+			<Card>
+				<Card.Content>
+					<Card.Header>Med Status</Card.Header>
+					<Card.Meta>
+						{howLong()}
+					</Card.Meta>
+					<Card.Content extra>
+						<Icon name='calendar outline' />
+						Refill Needed by {newDate}
+					</Card.Content>
+					<Card.Description>
 
 
-		</Card >
+						<Form.Group widths='equal'>
+							<Form.Input fluid type='date' label='Date Filled' placeholder='today?' />
+							<Button content='Add Fill' icon='edit outline' labelPosition='right' />
+						</Form.Group>
+					</Card.Description>
+				</Card.Content>
+			</Card>
+
+		</Card.Group>
 	)
 
 }
