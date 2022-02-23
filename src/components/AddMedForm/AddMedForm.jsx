@@ -21,12 +21,21 @@ function AddMedForm() {
 			[e.target.name]: e.target.value
 		})
 	}
+
+	function handleSubmit(e) {
+		e.preventDefault()
+		console.log(state, "state")
+		
+		
+
+	}
+
 	return (
 		<Grid textAlign='center' verticalAlign='middle'>
 			<Grid.Column style={{ maxWidth: 450 }}>
 				<Segment>
 					<Header as='h2'>Add A Medication</Header>
-					<Form>
+					<Form onSubmit={handleSubmit}>
 						<Form.Group widths='equal'>
 							<Form.Input fluid
 								label='Medication name'

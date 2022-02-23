@@ -5,7 +5,7 @@ const DoctorSchema = new mongoose.Schema({
 		type: String,
 		required: true
 	},
-	phoneNumber: {
+	phoneNum: {
 		type: String,
 		required: true
 	},
