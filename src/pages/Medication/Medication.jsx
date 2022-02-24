@@ -7,22 +7,21 @@ import { Grid } from "semantic-ui-react";
 
 export default function Feed() {
   const [meds, setMeds] = useState([]);
-  // console.log(meds, "state");
+  // console.log(meds, "state on medication page");
   const id = useParams();
-  console.log(id, "params")
-  
+  // console.log(id, "params")
+
   async function getMed() {
     try {
       const data = await medicationApi.getOne(id.medId);
       console.log(data.medication, "data")
-      const med = data.medication;
       setMeds(data.medication);
     } catch (err) {
-      console.log(err.message, " this is the error");
+      console.log(err.message, "-- this is the error");
       // setError(err.message);
     }
   }
-  
+
   useEffect(() => {
     getMed();
   }, []);

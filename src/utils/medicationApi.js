@@ -42,3 +42,18 @@ export function getOne(oneMed) {
     })
     .then(res => res.json());
 }
+
+export function updateFill(newFillDate, oneMed) {
+  console.log(oneMed, 'medId')
+  console.log(newFillDate.lastFilled, 'newFillDate')
+  return fetch(`${BASE_URL}/${oneMed}/updateFill`, {
+      method: 'PUT',
+      body: JSON.stringify(newFillDate),
+      headers: {
+        'Authorization': 'Bearer ' + tokenService.getToken(),
+        "Content-Type": "application/json",
+        'Accept': 'application/json'
+      }
+    })
+    .then(res => res.json());
+}

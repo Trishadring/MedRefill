@@ -5,7 +5,8 @@ const Medication = require('../models/medication');
 module.exports = {
   create,
   index,
-  getOne
+  getOne,
+  updateFill
 }
 
 async function create(req, res) {
@@ -61,8 +62,8 @@ async function index(req, res) {
 }
 
 async function getOne(req, res) {
-  // console.log('got to line 41 controller')
-  console.log(req.params.id, "request")
+  console.log('get one got to controller')
+  // console.log(req.params.id, "request")
   try {
     // this populates the user when you find the posts
     // so you'll have access to the users information
@@ -74,9 +75,30 @@ async function getOne(req, res) {
       medication: medication
     });
   } catch (err) {
-    console.log(err);
+    console.log(err, "get one controller");
     res.status(400).json({
       err
     })
   }
+}
+
+async function updateFill(req, res) {
+  console.log(req.params.id, "params")
+  try {
+    Medication.findById(req.params.id, function (err, medication) {
+      medication.refillDate = new Date(req.body.lastFilled)
+      console.log(medication)
+      medication.save(function (err) {
+        console.log(medication, "medication saved?");
+      });
+    });
+  } catch {
+    console.log(err, "updateFill controller");
+    res.status(400).json({
+      err
+    })
+  }
+
+  console.log(req.body, 'req.body');
+
 }

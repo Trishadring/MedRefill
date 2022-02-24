@@ -1,10 +1,23 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Card, Icon, Image, Button, Form } from 'semantic-ui-react'
 import { Link } from "react-router-dom";
+import UpdateFill from "../UpdateFill/UpdateFill"
+import * as medicationApi from "../../utils/medicationApi";
 
 
 function FullMedCard({ medication }) {
+  const [state, setState] = useState({
+    medName: medication.medName,
+    genericName: medication.medGenericName,
+    dosage: medication.medDose,
+    lastFilled: '',
+    perDay: '',
+    cost: '',
+    notes: medication.notes,
+    qtyPerFill: '',
+  })
   console.log(medication, "meds")
+  console.log(state, "state")
   const options = { weekday: 'long', month: 'long', day: 'numeric' };
   const time = new Date(medication.refillDate);
   const newDate = time.toLocaleDateString(undefined, options);
@@ -22,6 +35,22 @@ function FullMedCard({ medication }) {
       return (
         <span>You are out of medication!</span>
       )
+    }
+  }
+  function handleChange(e) {
+    setState({
+      ...state,
+      [e.target.name]: e.target.value
+    })
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault()
+    const formData = new FormData()
+    try {
+      medicationApi.create(state)
+    } catch (err) {
+      console.log(err)
     }
   }
   return (
@@ -55,11 +84,7 @@ function FullMedCard({ medication }) {
             Refill Needed by {newDate}
           </Card.Content>
           <Card.Description>
-
-            <Form.Group widths='equal'>
-              <Form.Input fluid type='date' label='Date Filled' placeholder='today?' />
-              <Button content='Add Fill' icon='edit outline' labelPosition='right' />
-            </Form.Group>
+            <UpdateFill med_id={medication._id}/>
           </Card.Description>
         </Card.Content>
       </Card>

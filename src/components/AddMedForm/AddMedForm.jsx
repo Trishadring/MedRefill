@@ -33,9 +33,7 @@ function AddMedForm() {
     console.log(state, "state")
 
     try {
-
       medicationApi.create(state)
-
     } catch (err) {
       console.log(err)
     }
@@ -55,13 +53,14 @@ function AddMedForm() {
                 name='medName'
                 value={state.medName}
               />
-              <Form.Input fluid label='Generic Name' placeholder='Generic Name' onChange={handleChange}
+              <Form.Input fluid label='Generic Name' placeholder='Generic Name'
+                onChange={handleChange}
                 name='genericName'
                 value={state.genericName} />
-
             </Form.Group>
             <Form.Group widths='equal'>
-              <Form.Input fluid label='Dosage' placeholder='Dosage' onChange={handleChange}
+              <Form.Input fluid label='Dosage' placeholder='Dosage'
+                onChange={handleChange}
                 name='dosage'
                 value={state.dosage} />
               <Form.Input label='Day you run out' type='date'
@@ -70,17 +69,19 @@ function AddMedForm() {
                 value={state.lastFilled} />
             </Form.Group>
             <Form.Group widths='equal'>
-              <Form.Input fluid label='# of pills per Refill' placeholder='30' onChange={handleChange}
+              <Form.Input fluid label='# of pills per Refill' placeholder='30'
+                onChange={handleChange}
                 name='qtyPerFill'
                 value={state.qtyPerFill} />
-              <Form.Input fluid label='Pills per Day' placeholder='1 or 2' onChange={handleChange}
+              <Form.Input fluid label='Pills per Day' placeholder='1 or 2'
+                onChange={handleChange}
                 name='perDay'
                 value={state.perDay} />
-              <Form.Input fluid label='Cost' placeholder='$$$' onChange={handleChange}
+              <Form.Input fluid label='Cost' placeholder='$$$'
+                onChange={handleChange}
                 name='cost'
                 value={state.cost} />
             </Form.Group>
-
             <Form.TextArea label='Notes' placeholder='Any notes?'
               onChange={handleChange}
               name='notes'
