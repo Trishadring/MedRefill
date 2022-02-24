@@ -18,3 +18,14 @@ export function create(doctor) {
     throw new Error('Error in creating the doctor, Check your express terminal!')
   })
 }
+
+export function getAll() {
+  return fetch(BASE_URL, {
+      headers: {
+        'Authorization': 'Bearer ' + tokenService.getToken(),
+        "Content-Type": "application/json",
+        'Accept': 'application/json'
+      }
+    })
+    .then(res => res.json());
+}

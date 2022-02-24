@@ -12,7 +12,11 @@ const DoctorSchema = new mongoose.Schema({
   notes: String,
   hours: {
     type: String,
-  }
+  },
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
+  },
 })
 
 

@@ -11,8 +11,7 @@ const MedicationSchema = new mongoose.Schema({
   },
   medGenericName: String,
   numOfPillsLeft: {
-    type: Number,
-    required: true
+    type: Number
   },
   refillNumber: Number,
   numPerDay: {
@@ -28,7 +27,6 @@ const MedicationSchema = new mongoose.Schema({
     type: Number,
     required: true
   },
-
   notes: String,
   doctor: {
     type: mongoose.Schema.Types.ObjectId,

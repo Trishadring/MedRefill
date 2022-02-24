@@ -4,6 +4,7 @@ const doctorsCtrl = require('../../controllers/doctors');
 
 
 
-router.post('/doctor', doctorsCtrl.create)
+router.post('/', doctorsCtrl.create)
+router.get('/', doctorsCtrl.getAll)
 
 module.exports = router;

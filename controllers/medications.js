@@ -6,34 +6,31 @@ module.exports = {
   create,
   index,
   getOne,
-  updateFill
+  updateFill,
+  updateDoc
 }
 
 async function create(req, res) {
-  console.log(req.body, 'req.body');
   const med = req.body;
   try {
-    const parsed = {
+    const medication = await Medication.create({
       medName: med.medName,
       medDose: med.dosage,
       medGenericName: med.genericName,
-      // numOfPills#
-      // refillNumber#
       numPerDay: parseInt(med.perDay),
       cost: parseInt(med.cost),
       refillDate: new Date(med.lastFilled),
       qtyPerFill: parseInt(med.qtyPerFill),
       notes: med.notes,
-      user: med.user,
-    }
-    console.log(parsed, "parsed data");
-    const medication = await Medication.create(parsed);
+      user: req.user
+    });
+    // medication = await medication.populate('user')
     console.log(medication, "meds");
-
     res.status(201).json({
-      medication: medication
+      medication
     })
   } catch (e) {
+    console.log(e)
     res.status(400).json({
       e
     })
@@ -41,7 +38,7 @@ async function create(req, res) {
 }
 
 async function index(req, res) {
-  // console.log('got to line 41 controller')
+  console.log(req.user, "user")
 
   try {
     // this populates the user when you find the posts
@@ -83,6 +80,27 @@ async function getOne(req, res) {
 }
 
 async function updateFill(req, res) {
+  console.log(req.params.id, "params")
+  try {
+    Medication.findById(req.params.id, function (err, medication) {
+      medication.refillDate = new Date(req.body.lastFilled)
+      console.log(medication)
+      medication.save(function (err) {
+        console.log(medication, "medication saved?");
+      });
+    });
+  } catch {
+    console.log(err, "updateFill controller");
+    res.status(400).json({
+      err
+    })
+  }
+
+  console.log(req.body, 'req.body');
+
+}
+
+async function updateDoc(req, res) {
   console.log(req.params.id, "params")
   try {
     Medication.findById(req.params.id, function (err, medication) {

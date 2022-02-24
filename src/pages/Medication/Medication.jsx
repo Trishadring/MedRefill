@@ -14,7 +14,7 @@ export default function Feed() {
   async function getMed() {
     try {
       const data = await medicationApi.getOne(id.medId);
-      console.log(data.medication, "data")
+      // console.log(data.medication, "data")
       setMeds(data.medication);
     } catch (err) {
       console.log(err.message, "-- this is the error");

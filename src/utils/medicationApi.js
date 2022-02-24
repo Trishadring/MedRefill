@@ -57,3 +57,16 @@ export function updateFill(newFillDate, oneMed) {
     })
     .then(res => res.json());
 }
+
+export function changeDoc(oneMed, id) {
+  return fetch(`${BASE_URL}/${oneMed}/updateDoc`, {
+      method: 'PUT',
+      body: JSON.stringify(id),
+      headers: {
+        'Authorization': 'Bearer ' + tokenService.getToken(),
+        "Content-Type": "application/json",
+        'Accept': 'application/json'
+      }
+    })
+    .then(res => res.json());
+}

@@ -3,7 +3,7 @@ import { Card, Icon, Image, Button, Form } from 'semantic-ui-react'
 import { Link } from "react-router-dom";
 import UpdateFill from "../UpdateFill/UpdateFill"
 import * as medicationApi from "../../utils/medicationApi";
-
+import DoctorCard from '../DoctorCard/DoctorCard'
 
 function FullMedCard({ medication }) {
   const [state, setState] = useState({
@@ -16,8 +16,8 @@ function FullMedCard({ medication }) {
     notes: medication.notes,
     qtyPerFill: '',
   })
-  console.log(medication, "meds")
-  console.log(state, "state")
+  // console.log(medication, "meds")
+  // console.log(state, "state")
   const options = { weekday: 'long', month: 'long', day: 'numeric' };
   const time = new Date(medication.refillDate);
   const newDate = time.toLocaleDateString(undefined, options);
@@ -79,16 +79,16 @@ function FullMedCard({ medication }) {
           <Card.Meta>
             {howLong()}
           </Card.Meta>
+          <Card.Content>
+            <UpdateFill med_id={medication._id} />
+          </Card.Content>
           <Card.Content extra>
             <Icon name='calendar outline' />
             Refill Needed by {newDate}
           </Card.Content>
-          <Card.Description>
-            <UpdateFill med_id={medication._id}/>
-          </Card.Description>
         </Card.Content>
       </Card>
-
+      <DoctorCard med_id={medication._id} />
     </Card.Group>
   )
 
