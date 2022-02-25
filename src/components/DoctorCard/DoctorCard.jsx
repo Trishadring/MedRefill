@@ -1,18 +1,18 @@
 import React, { useState, useEffect } from "react";
 import { Card } from "semantic-ui-react";
 import AddDoctor from '../AddDoctor/AddDoctor';
+import DoctorDetails from '../DoctorDetails/DoctorDetails';
 import * as doctorApi from "../../utils/doctorApi";
 
 
 function DoctorCard({ med_id, doctor }) {
-  console.log(med_id, "med id on doctor page fill")
+  console.log(doctor, "current doctor")
   const [state, setState] = useState([]);
   const [docKey, setdocKey] = useState([]);
   async function getDoctors() {
     try {
       const data = await doctorApi.getAll();
       await setState([...data.doctor]);
-      console.log(state, docKey.length, data, "state")
       if (docKey.length < 1) {
         getNames(data.doctor);
       }
@@ -22,10 +22,8 @@ function DoctorCard({ med_id, doctor }) {
   }
 
   function getNames(doctors) {
-    console.log(state, 'get names')
     try {
       doctors.forEach((doc) => {
-        console.log(docKey, "docKey");
         setdocKey(prevItems => [...prevItems, {
           key: doc._id,
           text: doc.name,
@@ -38,10 +36,9 @@ function DoctorCard({ med_id, doctor }) {
     }
   }
   useEffect(() => {
-    console.log("useEffect")
     getDoctors();
-
   }, []);
+
 
   return (
     <Card>
@@ -49,9 +46,11 @@ function DoctorCard({ med_id, doctor }) {
         <Card.Header>Doctor</Card.Header>
         <Card.Meta>
         </Card.Meta>
+        {doctor ? <DoctorDetails doctor={doctor} /> : ""}
         <Card.Content>
           <AddDoctor docKey={docKey} med_id={med_id} />
         </Card.Content>
+
         <Card.Content extra>
         </Card.Content>
       </Card.Content>

@@ -4,17 +4,13 @@ import * as medicationApi from "../../utils/medicationApi";
 
 
 function AddDoctor({ docKey, med_id }) {
-  console.log(docKey, "doctors")
   const [state, setState] = useState();
 
   function handleChange(e, data) {
-    console.log(e);
-    console.log(data.value, "data");
     setState(data.value);
   }
   function handleSubmit(e) {
     e.preventDefault()
-    console.log(state, "state on updatefill component")
     try {
       medicationApi.changeDoc(med_id, state)
     } catch (err) {
