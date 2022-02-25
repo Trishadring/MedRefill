@@ -6,13 +6,10 @@ import * as doctorApi from "../../utils/doctorApi";
 
 
 function DoctorCard({ med_id, doctor }) {
-  console.log(doctor, "current doctor")
-  const [state, setState] = useState([]);
   const [docKey, setdocKey] = useState([]);
   async function getDoctors() {
     try {
       const data = await doctorApi.getAll();
-      await setState([...data.doctor]);
       if (docKey.length < 1) {
         getNames(data.doctor);
       }

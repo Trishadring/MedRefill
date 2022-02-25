@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Grid, Segment, Button, Header, Form } from 'semantic-ui-react'
 import * as doctorApi from "../../utils/doctorApi";
 import Nav from '../../components/Nav/Nav'
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 // import * as likesAPI from "../../utils/likeApi";
 
 function AddProvider() {
@@ -26,7 +26,7 @@ function AddProvider() {
     for (let key in state) {
       formData.append(key, state[key])
     }
-    console.log(state, "state")
+    // console.log(state, "state")
     try {
       doctorApi.create(state)
       navigate("/");

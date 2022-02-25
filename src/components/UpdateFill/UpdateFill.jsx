@@ -1,5 +1,4 @@
 import React, {useState} from "react";
-import MedCard from '../MedCard/MedCard'
 import { Form, Button} from "semantic-ui-react";
 import * as medicationApi from "../../utils/medicationApi";
 
@@ -14,7 +13,7 @@ function UpdateFill({med_id}) {
       ...state,
       [e.target.name]: e.target.value
     })
-    console.log(state, "state on updatefill component")
+    // console.log(state, "state on updatefill component")
   }
   function handleSubmit(e) {
     e.preventDefault()

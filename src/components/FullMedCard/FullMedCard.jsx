@@ -5,7 +5,7 @@ import MedCard from '../MedCard/MedCard'
 import DoctorCard from '../DoctorCard/DoctorCard'
 
 function FullMedCard({ medication }) {
-  console.log(medication, "meds")
+  // console.log(medication, "meds")
 
   return (
     <Card.Group itemsPerRow={3}>

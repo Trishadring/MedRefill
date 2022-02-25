@@ -1,10 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import { Header, Segment, Icon } from "semantic-ui-react";
-import userService from "../../utils/userService";
 
 function Nav() {
-  const [user, setUser] = useState(userService.getUser());
 
   return (
     <Segment clearing>
@@ -12,7 +10,7 @@ function Nav() {
         <Link to="/">
           <Icon name="home"></Icon>
         </Link>
-        <Link to="" >
+        <Link to="/logout" >
           Logout
         </Link>
       </Header>
@@ -23,7 +21,6 @@ function Nav() {
       </Header>
     </Segment>
   )
-
 }
 
 export default Nav;

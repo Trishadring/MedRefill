@@ -24,7 +24,7 @@ function App() {
   if (user) {
     return (
       <Routes>
-        <Route path="/" element={<Feed />} />
+        <Route path="/" element={<Feed user={user} handleLogout={handleLogout} />} />
         <Route
           path="/login"
           element={<LoginPage handleSignUpOrLogin={handleSignUpOrLogin} />}
@@ -36,6 +36,7 @@ function App() {
         <Route path="/Doctor" element={< AddProvider />} />
         <Route path="/Pharmacy" element={< AddPharmacy />} />
         <Route path="/medication/:medId" element={< Medication />} />
+        <Route path="/logout" handleLogout={handleLogout} />
       </Routes>
     );
   }
@@ -51,7 +52,6 @@ function App() {
         element={<SignupPage handleSignUpOrLogin={handleSignUpOrLogin} />}
       />
       <Route path="/*" element={<Navigate to="/login" />} />
-      <Route path="/Doctor" element={< AddProvider />} />
     </Routes>
   );
 }

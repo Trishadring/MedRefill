@@ -4,7 +4,7 @@ import * as medicationApi from "../../utils/medicationApi";
 
 
 
-function AddMedForm() {
+function AddMedForm(props) {
 
   const [state, setState] = useState({
     medName: '',
@@ -30,13 +30,8 @@ function AddMedForm() {
     for (let key in state) {
       formData.append(key, state[key])
     }
-    console.log(state, "state")
+    props.handleAddMed(formData)
 
-    try {
-      medicationApi.create(state)
-    } catch (err) {
-      console.log(err)
-    }
   }
 
   return (
