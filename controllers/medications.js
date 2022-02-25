@@ -7,24 +7,21 @@ module.exports = {
   index,
   getOne,
   updateFill,
-  updateDoc
+  updateDoc,
+  updateMed
+}
+
+function addDays(pills, numPerDay, result) {
+  let PerDay = parseInt(numPerDay);
+  let daysOfPills = pills / PerDay;
+  let results = result.setDate(result.getDate() + daysOfPills);
+  return results;
 }
 
 async function create(req, res) {
   const med = req.body;
-
-  const numPerDay = parseInt(med.perDay);
-  console.log(numPerDay, "num per day")
-  const pills = med.numPillsLeft;
-  console.log(pills, "pills left")
-
-  function addDays(pills) {
-    let days = pills * numPerDay;
-    var result = new Date();
-    result.setDate(result.getDate() + days);
-    return result;
-  }
-  const refillDate = addDays(pills);
+  const today = new Date();
+  const refillDate = addDays(med.numPillsLeft, numPerDay, today);
   console.log(refillDate, "refillDate")
   try {
     const medication = await Medication.create({
@@ -67,10 +64,9 @@ async function index(req, res) {
 
 async function getOne(req, res) {
   try {
-
     const medication = await Medication.findById(req.params.id).populate('doctor')
     res.status(200).json({
-      medication: medication
+      medication
     });
   } catch (err) {
     console.log(err, "get one controller");
@@ -85,15 +81,8 @@ async function updateFill(req, res) {
   try {
     Medication.findById(req.params.id, function (err, medication) {
       console.log(medication)
-      function addDays() {
-        let days = medication.qtyPerFill / medication.numPerDay;
-        console.log(days, "days")
-        var result = new Date(medication.refillDate);
-        result.setDate(result.getDate() + days);
-        console.log(result, "new date")
-        return result;
-      }
-      const refillDate = addDays();
+      const dates = new Date(medication.refillDate);
+      const refillDate = addDays(medication.qtyPerFill, medication.numPerDay, dates);
       medication.refillDate = new Date(refillDate)
       medication.save();
       res.status(200).json({
@@ -106,6 +95,36 @@ async function updateFill(req, res) {
     })
   }
 }
+
+async function updateMed(req, res) {
+  const med = req.body;
+  console.log(med, "meds")
+  const numPerDay = parseInt(med.numPerDay);
+  const today = new Date();
+  const refillDate = addDays(med.numPillsLeft, numPerDay, today);
+  console.log(refillDate, "refillDate")
+  try {
+    Medication.findById(req.params.id, function (err, medication) {
+      medication.medName = med.medName,
+        medication.medDose = med.medDose,
+        medication.medGenericName = med.medGenericName,
+        medication.numPerDay = numPerDay,
+        medication.refillDate = new Date(refillDate),
+        medication.qtyPerFill = parseInt(med.qtyPerFill),
+        medication.notes = med.notes,
+        medication.user = req.user
+      medication.save();
+      res.status(201).json({
+        medication
+      })
+    });
+  } catch {
+    res.status(400).json({
+      err
+    })
+  }
+}
+
 
 async function updateDoc(req, res) {
   try {

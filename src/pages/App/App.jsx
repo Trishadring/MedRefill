@@ -8,6 +8,9 @@ import Feed from '../Feed/Feed';
 import AddProvider from '../AddProvider/AddProvider'
 import Medication from '../Medication/Medication'
 import AddPharmacy from '../AddPharmacy/AddPharmacy'
+import MedicationUpdate from '../MedicationUpdate/MedicationUpdate'
+
+
 
 function App() {
   const [user, setUser] = useState(userService.getUser());
@@ -36,6 +39,7 @@ function App() {
         <Route path="/Doctor" element={< AddProvider />} />
         <Route path="/Pharmacy" element={< AddPharmacy />} />
         <Route path="/medication/:medId" element={< Medication />} />
+        <Route path="/medication/:medId/edit" element={< MedicationUpdate />} />
         <Route path="/logout" handleLogout={handleLogout} />
       </Routes>
     );

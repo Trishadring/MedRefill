@@ -2,20 +2,21 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Nav from '../../components/Nav/Nav'
 import FullMedCard from '../../components/FullMedCard/FullMedCard'
+import EditMedForm from '../../components/EditMedForm/EditMedForm'
+import Loading from "../../components/Loader/Loader";
 import * as medicationApi from "../../utils/medicationApi";
 import { Grid } from "semantic-ui-react";
 
-export default function Feed() {
+export default function MedicationUpdate() {
   const [meds, setMeds] = useState([]);
-  // console.log(meds, "state on medication page");
+  const [loading, setLoading] = useState(true);
   const id = useParams();
-  // console.log(id, "params")
 
   async function getMed() {
     try {
       const data = await medicationApi.getOne(id.medId);
-      // console.log(data.medication, "data")
       setMeds(data.medication);
+      setLoading(() => false);
     } catch (err) {
       console.log(err.message, "-- this is the error");
       // setError(err.message);
@@ -25,6 +26,15 @@ export default function Feed() {
   useEffect(() => {
     getMed();
   }, []);
+
+  if (loading) {
+    return (
+      <>
+        <Nav />
+        <Loading />
+      </>
+    );
+  }
   return (
 
     <Grid centered>
@@ -34,7 +44,9 @@ export default function Feed() {
         </Grid.Column>
       </Grid.Row>
       <Grid.Row>
-        <FullMedCard medication={meds} />
+        <Grid.Column style={{ maxWidth: 450 }}>
+          <EditMedForm predata={meds} />
+        </Grid.Column>
       </Grid.Row>
     </Grid>
   )

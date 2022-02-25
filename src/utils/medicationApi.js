@@ -9,7 +9,7 @@ export function create(medication) {
     body: JSON.stringify(medication),
     headers: {
       'Authorization': 'Bearer ' + tokenService.getToken(),
-      "Content-Type": "application/json",
+      // "Content-Type": "application/json",
       'Accept': 'application/json'
       // <- the jwt contains the user who is sending the like
     }
@@ -79,6 +79,21 @@ export function changePharmacy(oneMed, id) {
   return fetch(`${BASE_URL}/${oneMed}/changePharmacy`, {
       method: 'PUT',
       body: JSON.stringify(id),
+      headers: {
+        'Authorization': 'Bearer ' + tokenService.getToken(),
+        "Content-Type": "application/json",
+        'Accept': 'application/json'
+      }
+    })
+    .then(res => res.json());
+}
+
+export function update(details, oneMed) {
+  console.log(oneMed, 'medId')
+  console.log(details, "details")
+  return fetch(`${BASE_URL}/${oneMed}/updateMed`, {
+      method: 'PUT',
+      body: JSON.stringify(details),
       headers: {
         'Authorization': 'Bearer ' + tokenService.getToken(),
         "Content-Type": "application/json",

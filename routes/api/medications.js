@@ -9,6 +9,7 @@ router.get('/', medicationCtrl.index)
 router.get('/:id', medicationCtrl.getOne)
 router.put('/:id/updateFill', medicationCtrl.updateFill)
 router.put('/:id/updateDoc', medicationCtrl.updateDoc)
+router.put('/:id/updateMed', medicationCtrl.updateMed)
 
 
 module.exports = router;

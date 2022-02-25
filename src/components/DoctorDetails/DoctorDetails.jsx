@@ -5,7 +5,7 @@ import { Card } from "semantic-ui-react";
 function DoctorDetails({ doctor }) {
 
   return (
-    <Card>
+    <Card fluid >
       <Card.Content>
         <Card.Header>{doctor.name}</Card.Header>
         <Card.Meta>

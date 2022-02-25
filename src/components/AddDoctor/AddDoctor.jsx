@@ -19,10 +19,10 @@ function AddDoctor({ docKey, med_id }) {
   }
   return (
     <Form onSubmit={handleSubmit} >
-      <Form.Group widths='equal'>
+      <Form.Group >
         <Form.Field
           control={Select}
-          label='Change Doctor'
+          // label='Change Doctor'
           options={docKey}
           placeholder='Doctor'
           onChange={handleChange}

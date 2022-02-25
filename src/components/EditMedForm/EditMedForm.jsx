@@ -1,17 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Grid, Segment, Button, Header, Form } from 'semantic-ui-react'
 import * as medicationApi from "../../utils/medicationApi";
+import { useNavigate, Navigate } from "react-router-dom";
 
 
 
-function AddMedForm() {
-
+function EditMedForm({ predata }) {
+  const navigate = useNavigate();
   const [state, setState] = useState({
     medName: '',
-    genericName: '',
-    dosage: '',
+    medGenericName: '',
+    medDose: '',
     numPillsLeft: '',
-    perDay: '',
+    numPerDay: '',
     cost: '',
     notes: '',
     qtyPerFill: '',
@@ -31,55 +32,72 @@ function AddMedForm() {
       formData.append(key, state[key])
     }
     try {
-      medicationApi.create(state)
+      console.log(state, "state")
+      medicationApi.update(state, predata._id)
+      navigate("/");
     } catch (err) {
       console.log(err)
     }
 
   }
+  function preLoadFormData() {
+    setState({
+      medName: predata.medName,
+      medGenericName: predata.medGenericName,
+      medDose: predata.medDose,
+      numPerDay: predata.numPerDay,
+      cost: predata.cost,
+      notes: predata.notes,
+      qtyPerFill: predata.qtyPerFill,
+    })
+  }
+
+  useEffect(() => {
+    preLoadFormData();
+  }, []);
+
 
   return (
     <Grid textAlign='center' verticalAlign='middle'>
       <Grid.Column style={{ maxWidth: 450 }}>
         <Segment>
-          <Header as='h2'>Add A Medication</Header>
+          <Header as='h2'>Edit A Medication</Header>
           <Form onSubmit={handleSubmit}>
             <Form.Group widths='equal'>
               <Form.Input fluid
                 label='Medication name'
-                placeholder='Medication name'
+                placeholder={state.medName}
                 onChange={handleChange}
                 name='medName'
                 value={state.medName}
               />
               <Form.Input fluid label='Generic Name' placeholder='Generic Name'
                 onChange={handleChange}
-                name='genericName'
-                value={state.genericName} />
+                name='medGenericName'
+                value={state.medGenericName} />
             </Form.Group>
             <Form.Group widths='equal'>
               <Form.Input fluid label='Dosage' placeholder='Dosage'
                 onChange={handleChange}
-                name='dosage'
-                value={state.dosage} />
+                name='medDose'
+                value={state.medDose} />
               <Form.Input fluid label='How many pills you have left' placeholder='# of pills'
+                type='number'
                 onChange={handleChange}
                 name='numPillsLeft'
                 value={state.numPillsLeft} />
             </Form.Group>
             <Form.Group widths='equal'>
               <Form.Input fluid label='# of pills per Refill' placeholder='30'
+                type='number'
                 onChange={handleChange}
                 name='qtyPerFill'
                 value={state.qtyPerFill} />
               <Form.Input fluid label='Pills per Day' placeholder='1 or 2'
                 onChange={handleChange}
-                name='perDay'
-                value={state.perDay} />
-              <Form.Input fluid label='Cost' placeholder='$$$'
-                onChange={handleChange}
-                name='cost'
-                value={state.cost} />
+                type='number'
+                name='numPerDay'
+                value={state.numPerDay} />
             </Form.Group>
             <Form.TextArea label='Notes' placeholder='Any notes?'
               onChange={handleChange}
@@ -94,4 +112,4 @@ function AddMedForm() {
 
 }
 
-export default AddMedForm;
+export default EditMedForm;

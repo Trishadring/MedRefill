@@ -1,9 +1,9 @@
-import React, {useState} from "react";
-import { Form, Button} from "semantic-ui-react";
+import React, { useState } from "react";
+import { Form, Button } from "semantic-ui-react";
 import * as medicationApi from "../../utils/medicationApi";
 
 
-function UpdateFill({med_id}) {
+function UpdateFill({ med_id }) {
   // console.log(med_id, "med id on update fill")
   const [state, setState] = useState({
     lastFilled: '',
@@ -25,12 +25,14 @@ function UpdateFill({med_id}) {
   }
   return (
     <Form onSubmit={handleSubmit}>
-    <Form.Group widths='equal'>
-      <Form.Input fluid type='date' onChange={handleChange}
-        name='lastFilled'
-        value={state.lastFilled} label='Date Filled' />
-      <Button content='Add Fill' icon='edit outline' labelPosition='right' />
-    </Form.Group>
+      <p>Add A Medication Refill</p>
+      <Form.Group widths='equal'>
+        <Form.Input fluid type='date' onChange={handleChange}
+          name='lastFilled'
+          value={state.lastFilled} />
+        <Button content='Add Fill' icon='edit outline' labelPosition='right' />
+        {/* ice box add ablity to update meds left */}
+      </Form.Group>
     </Form>
   )
 }

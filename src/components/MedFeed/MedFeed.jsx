@@ -6,7 +6,7 @@ import { Card } from "semantic-ui-react";
 function MedFeed({ medication, loading, user }) {
 
   return (
-    <Card.Group itemsPerRow={1} stackable>
+    <Card.Group itemsPerRow={2} stackable>
       {medication.map((medication) => {
         return (
           <MedCard medication={medication} user={user} />

@@ -1,17 +1,21 @@
 import React from "react";
-import { Card } from 'semantic-ui-react'
+import { Card, Button } from 'semantic-ui-react'
+import { Link, Navigate, Route, Routes } from "react-router-dom";
 import UpdateFill from "../UpdateFill/UpdateFill"
 import MedCard from '../MedCard/MedCard'
 import DoctorCard from '../DoctorCard/DoctorCard'
 
 function FullMedCard({ medication }) {
-  // console.log(medication, "meds")
 
   return (
-    <Card.Group itemsPerRow={3}>
+    <Card.Group itemsPerRow={2}>
       <MedCard medication={medication} />
       <Card>
         <Card.Content>
+          <Link to={`/medication/${medication._id}/edit`}>
+
+            <Button type='submit'>Edit meds</Button>
+          </Link>
           <Card.Header>Med Status</Card.Header>
           <Card.Content>
             <UpdateFill med_id={medication._id} />
@@ -19,6 +23,7 @@ function FullMedCard({ medication }) {
         </Card.Content>
       </Card>
       <DoctorCard med_id={medication._id} doctor={medication.doctor} />
+    
     </Card.Group>
   )
 
