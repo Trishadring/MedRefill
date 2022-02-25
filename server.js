@@ -25,6 +25,7 @@ app.use(require('./config/auth'));
 app.use('/api/users', require('./routes/api/users'));
 app.use('/api/doctor', require('./routes/api/doctors'));
 app.use('/api/medication', require('./routes/api/medications'));
+app.use('/api/pharmacy', require('./routes/api/pharmacies'));
 // "catch all" route
 app.get('/*', function (req, res) {
   res.sendFile(path.join(__dirname, 'build', 'index.html'));

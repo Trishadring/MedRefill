@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Grid, Segment, Button, Header, Form } from 'semantic-ui-react'
-import * as doctorApi from "../../utils/doctorApi";
 import Nav from '../../components/Nav/Nav'
+import * as pharmacyApi from "../../utils/pharmacyApi";
 import { useNavigate, Link } from "react-router-dom";
 // import * as likesAPI from "../../utils/likeApi";
 
@@ -28,7 +28,7 @@ function AddProvider() {
     }
     console.log(state, "state")
     try {
-      doctorApi.create(state)
+      pharmacyApi.create(state)
       navigate("/");
     } catch (err) {
       console.log(err)
@@ -43,14 +43,14 @@ function AddProvider() {
         </Grid.Column>
       </Grid.Row>
       <Grid.Row>
-        <Grid.Column style={{ maxWidth: 600 }}>
+        <Grid.Column style={{ maxWidth: 450 }}>
           <Segment>
-            <Header as='h2'>Add A Doctor</Header>
+            <Header as='h2'>Add A Pharmacy</Header>
             <Form onSubmit={handleSubmit}>
               <Form.Group widths='equal'>
                 <Form.Input fluid
-                  label='Doctors name'
-                  placeholder='Doctors name'
+                  label='Pharmacy name'
+                  placeholder='Pharmacy name'
                   onChange={handleChange}
                   name='name'
                   value={state.name}
@@ -72,7 +72,6 @@ function AddProvider() {
             </Form>
           </Segment>
         </Grid.Column>
-
       </Grid.Row>
     </Grid>
   )

@@ -4,25 +4,27 @@ import AddDoctor from '../AddDoctor/AddDoctor';
 import * as doctorApi from "../../utils/doctorApi";
 
 
-function DoctorCard({ med_id}) {
+function DoctorCard({ med_id, doctor }) {
   console.log(med_id, "med id on doctor page fill")
   const [state, setState] = useState([]);
   const [docKey, setdocKey] = useState([]);
   async function getDoctors() {
     try {
       const data = await doctorApi.getAll();
-      setState([...data.doctor]);
-      console.log(state, "state")
-      getNames();
+      await setState([...data.doctor]);
+      console.log(state, docKey.length, data, "state")
+      if (docKey.length < 1) {
+        getNames(data.doctor);
+      }
     } catch (err) {
       console.log(err.message, " this is the error");
     }
   }
 
-  async function getNames() {
+  function getNames(doctors) {
+    console.log(state, 'get names')
     try {
-      console.log(docKey, "docKey");
-      state.forEach((doc) => {
+      doctors.forEach((doc) => {
         console.log(docKey, "docKey");
         setdocKey(prevItems => [...prevItems, {
           key: doc._id,
@@ -36,8 +38,9 @@ function DoctorCard({ med_id}) {
     }
   }
   useEffect(() => {
+    console.log("useEffect")
     getDoctors();
-    
+
   }, []);
 
   return (

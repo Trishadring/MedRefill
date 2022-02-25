@@ -1,6 +1,4 @@
-const Doctor = require('../models/doctor');
-
-
+const Pharmacy = require('../models/pharmacy');
 
 module.exports = {
   create,
@@ -9,11 +7,9 @@ module.exports = {
 
 async function create(req, res) {
   console.log(req.body, 'req.body');
-  // let form = req.body;
-  // console.log(form);
   try {
     const d = req.body;
-    const doctor = await Doctor.create({
+    const pharmacy = await Pharmacy.create({
       user: req.user,
       name: d.name,
       phoneNum: d.phoneNum,
@@ -21,7 +17,7 @@ async function create(req, res) {
       notes: d.notes
     });
     res.status(201).json({
-      doctor: doctor
+      pharmacy: pharmacy
     })
   } catch (e) {
     console.log(e)
@@ -35,10 +31,11 @@ async function create(req, res) {
 async function getAll(req, res) {
 
   try {
-    const doctor = await Doctor.find({user: req.user._id});
-    console.log(doctor, "doctor");
+
+    const pharmacy = await Pharmacy.find({user: req.user._id});
+    console.log(pharmacy, "pharmacy");
     res.status(200).json({
-      doctor: doctor
+      pharmacy: pharmacy
     });
   } catch (err) {
     console.log(err);

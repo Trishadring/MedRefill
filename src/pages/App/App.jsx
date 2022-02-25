@@ -7,6 +7,7 @@ import userService from "../../utils/userService";
 import Feed from '../Feed/Feed';
 import AddProvider from '../AddProvider/AddProvider'
 import Medication from '../Medication/Medication'
+import AddPharmacy from '../AddPharmacy/AddPharmacy'
 
 function App() {
   const [user, setUser] = useState(userService.getUser()); // getUser decodes our JWT token, into a javascript object
@@ -35,6 +36,7 @@ function App() {
           element={<SignupPage handleSignUpOrLogin={handleSignUpOrLogin} />}
         />
         <Route path="/Doctor" element={< AddProvider />} />
+        <Route path="/Pharmacy" element={< AddPharmacy />} />
         <Route path="/medication/:medId" element={< Medication />} />
       </Routes>
     );

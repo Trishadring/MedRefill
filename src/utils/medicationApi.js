@@ -59,7 +59,24 @@ export function updateFill(newFillDate, oneMed) {
 }
 
 export function changeDoc(oneMed, id) {
+  console.log(oneMed, id, "med + id")
+  const body = {
+    'id': `${id}`
+  };
   return fetch(`${BASE_URL}/${oneMed}/updateDoc`, {
+      method: 'PUT',
+      body: JSON.stringify(body),
+      headers: {
+        'Authorization': 'Bearer ' + tokenService.getToken(),
+        "Content-Type": "application/json",
+        'Accept': 'application/json'
+      }
+    })
+    .then(res => res.json());
+}
+
+export function changePharmacy(oneMed, id) {
+  return fetch(`${BASE_URL}/${oneMed}/changePharmacy`, {
       method: 'PUT',
       body: JSON.stringify(id),
       headers: {

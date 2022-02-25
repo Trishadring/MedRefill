@@ -30,12 +30,12 @@ export default function Feed() {
       </Grid.Row>
       <Grid.Row>
         <Grid.Column style={{ maxWidth: 450 }}>
-          <AddMedForm />
+          <MedFeed medication={meds} />
         </Grid.Column>
       </Grid.Row>
       <Grid.Row>
         <Grid.Column style={{ maxWidth: 450 }}>
-          <MedFeed medication={meds} />
+          <AddMedForm />
         </Grid.Column>
       </Grid.Row>
     </Grid>
