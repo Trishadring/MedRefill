@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Grid, Segment, Button, Header, Form, Icon } from 'semantic-ui-react'
+import { Grid, Segment, Button, Header, Form } from 'semantic-ui-react'
 import * as medicationApi from "../../utils/medicationApi";
 
 
@@ -10,7 +10,7 @@ function AddMedForm() {
     medName: '',
     genericName: '',
     dosage: '',
-    lastFilled: '',
+    numPillsLeft: '',
     perDay: '',
     cost: '',
     notes: '',
@@ -63,10 +63,14 @@ function AddMedForm() {
                 onChange={handleChange}
                 name='dosage'
                 value={state.dosage} />
-              <Form.Input label='Day you run out' type='date'
+              <Form.Input fluid label='How many pills you have left' placeholder='# of pills'
+                onChange={handleChange}
+                name='numPillsLeft'
+                value={state.numPillsLeft} />
+              {/* <Form.Input label='Day you run out' type='date'
                 onChange={handleChange}
                 name='lastFilled'
-                value={state.lastFilled} />
+                value={state.lastFilled} /> */}
             </Form.Group>
             <Form.Group widths='equal'>
               <Form.Input fluid label='# of pills per Refill' placeholder='30'

@@ -3,6 +3,7 @@ import { Card } from "semantic-ui-react";
 
 
 function DoctorDetails({ doctor }) {
+
   return (
     <Card>
       <Card.Content>

@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { Form, Button, Select, Card } from "semantic-ui-react";
+import React, { useState } from "react";
+import { Form, Button, Select } from "semantic-ui-react";
 import * as medicationApi from "../../utils/medicationApi";
 
 

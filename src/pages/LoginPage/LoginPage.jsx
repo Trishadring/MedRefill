@@ -2,19 +2,12 @@ import React, { useState } from "react";
 import "./LoginPage.css";
 import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 import userService from "../../utils/userService";
-import { useNavigate, Link, Navigate } from "react-router-dom";
-import {
-  Button,
-  Form,
-  Grid,
-  Header,
-  Image,
-  Message,
-  Segment,
-} from "semantic-ui-react";
+import { useNavigate, Link } from "react-router-dom";
+import { Button, Form, Grid, Header, Message, Segment } from "semantic-ui-react";
 
 export default function LoginPage(props) {
   const [invalidForm, setValidForm] = useState(false);
+  const navigate = useNavigate();
   const [error, setError] = useState('')
   const [state, setState] = useState({
     email: '',
@@ -32,11 +25,9 @@ export default function LoginPage(props) {
     e.preventDefault();
     try {
       await userService.login(state);
-      // Route to wherever you want!
       props.handleSignUpOrLogin();
-      // navigate("/");
+      navigate("/");
     } catch (err) {
-      // Invalid user data (probably duplicate email)
       setError(err.message);
     }
   }
@@ -50,29 +41,9 @@ export default function LoginPage(props) {
           </Header>
           <Form autoComplete="off" onSubmit={handleSubmit}>
             <Segment stacked>
-              <Form.Input
-                type="email"
-                name="email"
-                placeholder="email"
-                value={state.email}
-                onChange={handleChange}
-                required
-              />
-              <Form.Input
-                name="password"
-                type="password"
-                placeholder="password"
-                value={state.password}
-                onChange={handleChange}
-                required
-              />
-              <Button
-                color='teal'
-                fluid size='large'
-                type="submit"
-                className="btn"
-                disabled={invalidForm}
-              >
+              <Form.Input type="email" name="email" placeholder="email" value={state.email} onChange={handleChange} required />
+              <Form.Input name="password" type="password" placeholder="password" value={state.password} onChange={handleChange} required />
+              <Button color='teal' fluid size='large' type="submit" className="btn" disabled={invalidForm} >
                 Login
               </Button>
             </Segment>

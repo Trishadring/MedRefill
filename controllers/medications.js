@@ -12,6 +12,20 @@ module.exports = {
 
 async function create(req, res) {
   const med = req.body;
+
+  const numPerDay = parseInt(med.perDay);
+  console.log(numPerDay, "num per day")
+  const pills = med.numPillsLeft;
+  console.log(pills, "pills left")
+
+  function addDays(pills) {
+    let days = pills * numPerDay;
+    var result = new Date();
+    result.setDate(result.getDate() + days);
+    return result;
+  }
+  const refillDate = addDays(pills);
+  console.log(refillDate, "refillDate")
   try {
     const medication = await Medication.create({
       medName: med.medName,
@@ -19,18 +33,15 @@ async function create(req, res) {
       medGenericName: med.genericName,
       numPerDay: parseInt(med.perDay),
       cost: parseInt(med.cost),
-      refillDate: new Date(med.lastFilled),
+      refillDate: new Date(refillDate),
       qtyPerFill: parseInt(med.qtyPerFill),
       notes: med.notes,
       user: req.user
     });
-    // medication = await medication.populate('user')
-    console.log(medication, "meds");
     res.status(201).json({
       medication
     })
   } catch (e) {
-    console.log(e)
     res.status(400).json({
       e
     })
@@ -38,14 +49,11 @@ async function create(req, res) {
 }
 
 async function index(req, res) {
-  console.log(req.user, "user")
 
   try {
-
     const medication = await Medication.find({
       user: req.user._id
     });
-    console.log(medication, "meds");
     res.status(200).json({
       medication: medication
     });
@@ -58,12 +66,9 @@ async function index(req, res) {
 }
 
 async function getOne(req, res) {
-  console.log('get one got to controller')
-  // console.log(req.params.id, "request")
   try {
 
     const medication = await Medication.findById(req.params.id).populate('doctor')
-    console.log(medication, "one med");
     res.status(200).json({
       medication: medication
     });
@@ -76,40 +81,42 @@ async function getOne(req, res) {
 }
 
 async function updateFill(req, res) {
-  console.log(req.params.id, "params")
+
   try {
     Medication.findById(req.params.id, function (err, medication) {
-      medication.refillDate = new Date(req.body.lastFilled)
       console.log(medication)
-      medication.save(function (err) {
-        console.log(medication, "medication saved?");
-      });
+      function addDays() {
+        let days = medication.qtyPerFill / medication.numPerDay;
+        console.log(days, "days")
+        var result = new Date(medication.refillDate);
+        result.setDate(result.getDate() + days);
+        console.log(result, "new date")
+        return result;
+      }
+      const refillDate = addDays();
+      medication.refillDate = new Date(refillDate)
+      medication.save();
+      res.status(200).json({
+        err
+      })
     });
   } catch {
-    console.log(err, "updateFill controller");
     res.status(400).json({
       err
     })
   }
-
-  console.log(req.body, 'req.body');
-
 }
 
 async function updateDoc(req, res) {
-  console.log(req.params.id, "params")
   try {
-    console.log(req.body, "bodddyd")
     let medication = await Medication.findById(req.params.id)
     if (!medication) return "medication not found"
     medication.doctor = req.body.id
-    console.log(medication, "medication after doctor added")
     medication.save();
     res.status(200).json({
       medication
     });
   } catch (err) {
-    console.log(err, "updateDoc controller");
     res.status(400).json({
       err
     })

@@ -16,7 +16,7 @@ async function create(req, res) {
       hours: d.hours,
       notes: d.notes
     });
-    res.status(201).json({
+    res.status(200).json({
       pharmacy: pharmacy
     })
   } catch (e) {
