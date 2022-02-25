@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Grid, Segment, Button, Header, Form } from 'semantic-ui-react'
-import * as medicationApi from "../../utils/medicationApi";
+import * as medicationApi from "../../../../utils/medicationApi";
 import { useNavigate, Navigate } from "react-router-dom";
 
 

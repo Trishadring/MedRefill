@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Card } from "semantic-ui-react";
-import AddDoctor from '../AddDoctor/AddDoctor';
+import AddDoctor from '../Forms/AddDoctor/AddDoctor';
 import DoctorDetails from '../DoctorDetails/DoctorDetails';
-import * as doctorApi from "../../utils/doctorApi";
+import * as doctorApi from "../../../utils/doctorApi";
 
 
 function DoctorCard({ med_id, doctor }) {

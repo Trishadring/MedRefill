@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Nav from '../../components/Nav/Nav'
-import AddMedForm from '../../components/AddMedForm/AddMedForm'
-import MedFeed from '../../components/MedFeed/MedFeed'
+import AddMedForm from '../../components/Medication/Form/AddMedForm/AddMedForm'
+import MedFeed from '../../components/Medication/MedFeed/MedFeed'
 import * as medicationApi from "../../utils/medicationApi";
 import { Grid } from "semantic-ui-react";
 

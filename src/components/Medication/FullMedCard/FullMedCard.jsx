@@ -1,7 +1,7 @@
 import React from "react";
 import { Card, Button } from 'semantic-ui-react'
 import { Link, Navigate, Route, Routes } from "react-router-dom";
-import UpdateFill from "../UpdateFill/UpdateFill"
+import UpdateFill from "../Form/UpdateFill/UpdateFill"
 import MedCard from '../MedCard/MedCard'
 import DoctorCard from '../DoctorCard/DoctorCard'
 

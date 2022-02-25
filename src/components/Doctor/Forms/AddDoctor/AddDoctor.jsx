@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Form, Button, Select } from "semantic-ui-react";
-import * as medicationApi from "../../utils/medicationApi";
+import * as medicationApi from "../../../../utils/medicationApi";
 
 
 function AddDoctor({ docKey, med_id }) {

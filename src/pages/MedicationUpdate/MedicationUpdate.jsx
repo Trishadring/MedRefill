@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Nav from '../../components/Nav/Nav'
-import FullMedCard from '../../components/FullMedCard/FullMedCard'
-import EditMedForm from '../../components/EditMedForm/EditMedForm'
+import FullMedCard from '../../components/Medication/FullMedCard/FullMedCard'
+import EditMedForm from '../../components/Medication/Form/EditMedForm/EditMedForm'
 import Loading from "../../components/Loader/Loader";
 import * as medicationApi from "../../utils/medicationApi";
 import { Grid } from "semantic-ui-react";
