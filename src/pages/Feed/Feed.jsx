@@ -4,15 +4,17 @@ import AddMedForm from '../../components/Medication/Form/AddMedForm/AddMedForm'
 import MedFeed from '../../components/Medication/MedFeed/MedFeed'
 import * as medicationApi from "../../utils/medicationApi";
 import { Grid } from "semantic-ui-react";
+import Loading from "../../components/Loader/Loader";
 
 export default function Feed({ user, handleSignUpOrLogin }) {
   const [meds, setMeds] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   // console.log(meds, "state")
   async function getMeds() {
     try {
       const data = await medicationApi.getAll();
       setMeds([...data.medication]);
+      setLoading(() => false);
     } catch (err) {
       console.log(err.message, " this is the error");
     }
@@ -21,7 +23,14 @@ export default function Feed({ user, handleSignUpOrLogin }) {
   useEffect(() => {
     getMeds();
   }, []);
-
+  if (loading) {
+    return (
+      <>
+        <Nav />
+        <Loading />
+      </>
+    );
+  }
   return (
 
     <Grid centered>

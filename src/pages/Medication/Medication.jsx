@@ -4,27 +4,35 @@ import Nav from '../../components/Nav/Nav'
 import FullMedCard from '../../components/Medication/FullMedCard/FullMedCard'
 import * as medicationApi from "../../utils/medicationApi";
 import { Grid } from "semantic-ui-react";
+import Loading from "../../components/Loader/Loader";
 
 export default function Feed() {
   const [meds, setMeds] = useState([]);
-  // console.log(meds, "state on medication page");
+  const [loading, setLoading] = useState(true);
   const id = useParams();
-  // console.log(id, "params")
 
   async function getMed() {
     try {
       const data = await medicationApi.getOne(id.medId);
-      // console.log(data.medication, "data")
       setMeds(data.medication);
+      setLoading(() => false);
     } catch (err) {
       console.log(err.message, "-- this is the error");
-      // setError(err.message);
     }
   }
 
   useEffect(() => {
     getMed();
   }, []);
+
+  if (loading) {
+    return (
+      <>
+        <Nav />
+        <Loading />
+      </>
+    );
+  }
   return (
 
     <Grid centered>

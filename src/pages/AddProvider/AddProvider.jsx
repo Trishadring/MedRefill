@@ -3,7 +3,6 @@ import { Grid, Segment, Button, Header, Form } from 'semantic-ui-react'
 import * as doctorApi from "../../utils/doctorApi";
 import Nav from '../../components/Nav/Nav'
 import { useNavigate } from "react-router-dom";
-// import * as likesAPI from "../../utils/likeApi";
 
 function AddProvider() {
   const [state, setState] = useState({

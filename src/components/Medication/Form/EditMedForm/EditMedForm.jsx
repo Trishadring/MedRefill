@@ -13,7 +13,6 @@ function EditMedForm({ predata }) {
     medDose: '',
     numPillsLeft: '',
     numPerDay: '',
-    cost: '',
     notes: '',
     qtyPerFill: '',
   })
