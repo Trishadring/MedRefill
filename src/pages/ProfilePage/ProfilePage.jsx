@@ -11,6 +11,7 @@ import { useParams, Link } from "react-router-dom";
 
 export default function ProfilePage(props) {
   const [doctors, setDoctors] = useState([]);
+  const [pharmacies, setPharmacies] = useState([]);
   const [user, setUser] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -28,6 +29,7 @@ export default function ProfilePage(props) {
 
       setLoading(() => false);
       setDoctors(() => data.doctors);
+      setPharmacies(() => data.pharmacies);
       setUser(() => data.user);
     } catch (err) {
       console.log(err);
@@ -71,20 +73,35 @@ export default function ProfilePage(props) {
         </Grid.Column>
       </Grid.Row>
       <Grid.Row centered>
-        <Grid.Column style={{ maxWidth: 750 }}>
-          <Card>
-            <Card.Content>
-              <Card.Header>List of Doctors</Card.Header>
-              <Segment.Group>
-                {doctors.map((doctor) => {
-                  return (
-                    <DoctorDetails doctor={doctor} />
-                  );
-                })}
-              </Segment.Group>
-              <Link to="/Doctor">Add A Doctor</Link>
-            </Card.Content>
-          </Card>
+        <Grid.Column style={{ maxWidth: 800 }}>
+          <Card.Group itemsPerRow={2} stackable>
+            <Card fluid>
+              <Card.Content>
+                <Card.Header>List of Doctors</Card.Header>
+                <Segment.Group>
+                  {doctors.map((doctor) => {
+                    return (
+                      <DoctorDetails doctor={doctor} />
+                    );
+                  })}
+                </Segment.Group>
+                <Link to="/Doctor">Add A Doctor</Link>
+              </Card.Content>
+            </Card>
+            <Card fluid>
+              <Card.Content>
+                <Card.Header>List of Pharmacies</Card.Header>
+                <Segment.Group>
+                  {pharmacies.map((pharmacy) => {
+                    return (
+                      <DoctorDetails doctor={pharmacy} />
+                    );
+                  })}
+                </Segment.Group>
+                <Link to="/Pharmacy">Add A Pharmacy</Link>
+              </Card.Content>
+            </Card>
+          </Card.Group>
         </Grid.Column>
       </Grid.Row>
     </Grid>

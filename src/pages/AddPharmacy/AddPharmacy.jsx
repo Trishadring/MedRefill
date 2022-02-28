@@ -4,7 +4,7 @@ import Nav from '../../components/Nav/Nav'
 import * as pharmacyApi from "../../utils/pharmacyApi";
 import { useNavigate } from "react-router-dom";
 
-function AddProvider() {
+function AddProvider({ user }) {
   const [state, setState] = useState({
     name: '',
     phoneNum: '',
@@ -28,7 +28,7 @@ function AddProvider() {
     // console.log(state, "state")
     try {
       pharmacyApi.create(state)
-      navigate("/");
+      navigate(`\${user.username}`);
     } catch (err) {
       console.log(err)
     }
@@ -38,7 +38,7 @@ function AddProvider() {
     <Grid centered>
       <Grid.Row>
         <Grid.Column>
-          <Nav />
+          <Nav user={user} />
         </Grid.Column>
       </Grid.Row>
       <Grid.Row>

@@ -1,5 +1,6 @@
 const User = require('../models/user');
 const Doctor = require('../models/doctor');
+const Pharmacy = require('../models/pharmacy');
 const jwt = require('jsonwebtoken');
 const SECRET = process.env.SECRET;
 const {
@@ -100,10 +101,14 @@ async function profile(req, res) {
     const doctors = await Doctor.find({
       user: user._id
     }).populate("user").exec();
+    const pharmacies = await Pharmacy.find({
+      user: user._id
+    }).populate("user").exec();
     console.log(doctors, ' this doctors')
     res.status(200).json({
       doctors: doctors,
-      user: user
+      user: user,
+      pharmacies: pharmacies
     })
   } catch (err) {
     console.log(err)

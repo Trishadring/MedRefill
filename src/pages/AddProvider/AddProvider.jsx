@@ -28,7 +28,7 @@ function AddProvider({ user }) {
     // console.log(state, "state")
     try {
       doctorApi.create(state)
-      navigate("/");
+      navigate(`\${user.username}`);
     } catch (err) {
       console.log(err)
     }
