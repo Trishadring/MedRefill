@@ -4,7 +4,7 @@ import * as doctorApi from "../../utils/doctorApi";
 import Nav from '../../components/Nav/Nav'
 import { useNavigate } from "react-router-dom";
 
-function AddProvider() {
+function AddProvider({ user }) {
   const [state, setState] = useState({
     name: '',
     phoneNum: '',
@@ -38,7 +38,7 @@ function AddProvider() {
     <Grid centered>
       <Grid.Row>
         <Grid.Column>
-          <Nav />
+          <Nav user={user} />
         </Grid.Column>
       </Grid.Row>
       <Grid.Row>

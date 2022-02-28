@@ -9,6 +9,7 @@ import AddProvider from '../AddProvider/AddProvider'
 import Medication from '../Medication/Medication'
 import AddPharmacy from '../AddPharmacy/AddPharmacy'
 import MedicationUpdate from '../MedicationUpdate/MedicationUpdate'
+import ProfilePage from '../ProfilePage/ProfilePage'
 
 
 
@@ -36,10 +37,10 @@ function App() {
           path="/signup"
           element={<SignupPage handleSignUpOrLogin={handleSignUpOrLogin} />}
         />
-        {/* <Route path="/:username" element={<ProfilePage user={user} handleLogout={handleLogout} />} /> */}
-        <Route path="/Doctor" element={< AddProvider />} />
-        <Route path="/Pharmacy" element={< AddPharmacy />} />
-        <Route path="/medication/:medId" element={< Medication />} />
+        <Route path="/:username" element={<ProfilePage user={user} handleLogout={handleLogout} />} />
+        <Route path="/Doctor" element={< AddProvider user={user} />} />
+        <Route path="/Pharmacy" element={< AddPharmacy user={user} />} />
+        <Route path="/medication/:medId" element={< Medication user={user} />} />
         <Route path="/medication/:medId/edit" element={< MedicationUpdate />} />
         <Route path="/logout" handleLogout={handleLogout} />
       </Routes>
