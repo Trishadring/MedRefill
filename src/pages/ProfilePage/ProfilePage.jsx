@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { Grid, Card, Segment, Button } from "semantic-ui-react";
 import Nav from "../../components/Nav/Nav";
 import Loading from "../../components/Loader/Loader";
-import DoctorDetails from '../../components/Doctor/DoctorDetails/DoctorDetails'
 import userService from "../../utils/userService";
 import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 import ProfileBio from '../../components/ProfileBio/ProfileBio'

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Grid, Segment, Button, Header, Form } from 'semantic-ui-react'
+import { useParams } from "react-router-dom";
 import * as doctorApi from "../../utils/doctorApi";
 import * as pharmacyApi from "../../utils/pharmacyApi";
 import Nav from '../../components/Nav/Nav'
@@ -9,6 +10,8 @@ function AddProvider({ user, type }) {
   let API = "";
   if (type === "Doctor") { API = doctorApi }
   if (type === "Pharmacy") { API = pharmacyApi }
+  const id = useParams();
+  console.log(id, "params");
   const [state, setState] = useState({
     name: '',
     phoneNum: '',

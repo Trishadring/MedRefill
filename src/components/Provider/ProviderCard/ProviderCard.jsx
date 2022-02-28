@@ -1,6 +1,6 @@
 import React from "react";
 import { Card, Button, Segment } from "semantic-ui-react"; import { Link } from "react-router-dom";
-import DoctorDetails from '../../Doctor/DoctorDetails/DoctorDetails'
+import ProviderDetails from '../ProviderDetails/ProviderDetails'
 
 function ProviderCard({ providers, type }) {
   return (
@@ -10,7 +10,7 @@ function ProviderCard({ providers, type }) {
         <Segment.Group>
           {providers.map((provider) => {
             return (
-              <DoctorDetails key={provider._id} type="provider" doctor={provider} />
+              <ProviderDetails key={provider._id} type="provider" doctor={provider} />
             );
           })}
         </Segment.Group>

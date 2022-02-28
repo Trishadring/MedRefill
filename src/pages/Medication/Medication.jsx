@@ -3,12 +3,13 @@ import { useParams } from "react-router-dom";
 import Nav from '../../components/Nav/Nav'
 import FullMedCard from '../../components/Medication/FullMedCard/FullMedCard'
 import * as medicationApi from "../../utils/medicationApi";
+import userService from "../../utils/userService";
 import { Grid } from "semantic-ui-react";
 import Loading from "../../components/Loader/Loader";
 
-export default function Feed({ user }) {
-  console.log(user, "user")
+export default function Medication({ user }) {
   const [meds, setMeds] = useState([]);
+  const [Providers, setProviders] = useState([]);
   const [loading, setLoading] = useState(true);
   const id = useParams();
 
@@ -16,14 +17,27 @@ export default function Feed({ user }) {
     try {
       const data = await medicationApi.getOne(id.medId);
       setMeds(data.medication);
-      setLoading(() => false);
     } catch (err) {
       console.log(err.message, "-- this is the error");
+    }
+  }
+  async function getProfile() {
+    try {
+      const data = await userService.getProfile(user.username);
+      setProviders({
+        doctors: data.doctors,
+        pharmacies: data.pharmacies
+      })
+      setLoading(() => false);
+    } catch (err) {
+      console.log(err);
+      setLoading(() => false);
     }
   }
 
   useEffect(() => {
     getMed();
+    getProfile();
   }, []);
 
   if (loading) {
@@ -44,7 +58,7 @@ export default function Feed({ user }) {
       </Grid.Row>
       <Grid.Row>
         <Grid.Column style={{ maxWidth: 900 }}>
-          <FullMedCard medication={meds} />
+          <FullMedCard medication={meds} providers={Providers} />
         </Grid.Column>
       </Grid.Row>
     </Grid>

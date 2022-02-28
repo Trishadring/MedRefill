@@ -8,13 +8,16 @@ import { Grid } from "semantic-ui-react";
 
 export default function MedicationUpdate({ user }) {
   const [meds, setMeds] = useState([]);
+  const [providers, setProviders] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
   const id = useParams();
 
   async function getMed() {
     try {
       const data = await medicationApi.getOne(id.medId);
       setMeds(data.medication);
+      console.log(meds);
       setLoading(() => false);
     } catch (err) {
       console.log(err.message, "-- this is the error");

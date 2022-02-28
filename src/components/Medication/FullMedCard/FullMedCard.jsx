@@ -1,13 +1,11 @@
 import React from "react";
 import { Card, Button } from 'semantic-ui-react'
-import { Link, Navigate, Route, Routes } from "react-router-dom";
+import { Link } from "react-router-dom";
 import UpdateFill from "../Form/UpdateFill/UpdateFill"
 import MedCard from '../MedCard/MedCard'
-import DoctorCard from '../../Doctor/DoctorCard/DoctorCard'
-import PharmacyCard from '../../Pharmacy/PharmacyCard/PharmacyCard'
+import ProviderMedCard from '../../Provider/ProviderMedCard/ProviderMedCard'
 
-function FullMedCard({ medication }) {
-  console.log(medication, "has medication")
+function FullMedCard({ medication, providers}) {
   return (
     <Card.Group itemsPerRow={2}>
       <MedCard medication={medication} />
@@ -22,8 +20,8 @@ function FullMedCard({ medication }) {
           </Link>
         </Card.Content>
       </Card>
-      <DoctorCard med_id={medication._id} doctor={medication.doctor} />
-      <PharmacyCard med_id={medication._id} pharmacy={medication.pharmacy} />
+      <ProviderMedCard type="Doctor" med_id={medication._id} provider={medication.doctor} providers={providers.doctors}/>
+      <ProviderMedCard type="Pharmacy" med_id={medication._id} provider={medication.pharmacy} providers={providers.doctors} />
 
 
     </Card.Group>

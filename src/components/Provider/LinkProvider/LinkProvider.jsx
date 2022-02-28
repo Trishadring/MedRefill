@@ -3,16 +3,16 @@ import { Form, Button, Select } from "semantic-ui-react";
 import * as medicationApi from "../../../utils/medicationApi";
 
 
-function AddDoctor({ pharmKey, med_id }) {
+function LinkProvider({ options, med_id, type }) {
   const [state, setState] = useState();
-
   function handleChange(e, data) {
     setState(data.value);
   }
   function handleSubmit(e) {
     e.preventDefault()
     try {
-      medicationApi.changePharmacy(med_id, state)
+      if (type === "Doctor") { medicationApi.changeDoc(med_id, state) }
+      if (type === "Pharmacy") { medicationApi.changePharmacy(med_id, state) }
     } catch (err) {
       console.log(err)
     }
@@ -22,15 +22,14 @@ function AddDoctor({ pharmKey, med_id }) {
       <Form.Group >
         <Form.Field
           control={Select}
-          // label='Change Doctor'
-          options={pharmKey}
-          placeholder='Pharmacy'
+          options={options}
+          placeholder={type}
           onChange={handleChange}
         />
-        <Button content='Update Pharmacy' icon='edit outline' labelPosition='right' />
+        <Button content={`Update ${type}`} icon='edit outline' labelPosition='right' />
       </Form.Group>
     </Form>
   )
 }
 
-export default AddDoctor;
+export default LinkProvider;
