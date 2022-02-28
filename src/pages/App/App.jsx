@@ -36,6 +36,7 @@ function App() {
           path="/signup"
           element={<SignupPage handleSignUpOrLogin={handleSignUpOrLogin} />}
         />
+        {/* <Route path="/:username" element={<ProfilePage user={user} handleLogout={handleLogout} />} /> */}
         <Route path="/Doctor" element={< AddProvider />} />
         <Route path="/Pharmacy" element={< AddPharmacy />} />
         <Route path="/medication/:medId" element={< Medication />} />

@@ -12,13 +12,13 @@ function FullMedCard({ medication }) {
       <MedCard medication={medication} />
       <Card>
         <Card.Content>
-          <Link to={`/medication/${medication._id}/edit`}>
-            <Button type='submit'>Edit meds</Button>
-          </Link>
           <Card.Header>Med Status</Card.Header>
           <Card.Content>
             <UpdateFill med_id={medication._id} />
           </Card.Content>
+          <Link to={`/medication/${medication._id}/edit`}>
+            <Button type='submit'>Edit meds</Button>
+          </Link>
         </Card.Content>
       </Card>
       <DoctorCard med_id={medication._id} doctor={medication.doctor} />
