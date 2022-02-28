@@ -3,7 +3,6 @@ import tokenService from "./tokenService";
 const BASE_URL = '/api/doctor';
 
 export function create(doctor) {
-  console.log(doctor, "doctor")
   return fetch(`${BASE_URL}`, { // <- this end point is communicating with the create route in /routes/likes.js on express server
     method: 'POST',
     body: JSON.stringify(doctor),
@@ -32,6 +31,18 @@ export function getAll() {
 
 export function getOne(id) {
   return fetch(`${BASE_URL}/${id}`, {
+      headers: {
+        'Authorization': 'Bearer ' + tokenService.getToken(),
+        "Content-Type": "application/json",
+        'Accept': 'application/json'
+      }
+    })
+    .then(res => res.json());
+}
+export function update(details, id) {
+  return fetch(`${BASE_URL}/${id}/update`, {
+      method: 'PUT',
+      body: JSON.stringify(details),
       headers: {
         'Authorization': 'Bearer ' + tokenService.getToken(),
         "Content-Type": "application/json",

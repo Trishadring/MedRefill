@@ -5,11 +5,11 @@ const Doctor = require('../models/doctor');
 module.exports = {
   create,
   getAll,
-  getOne
+  getOne,
+  update
 }
 
 async function create(req, res) {
-  console.log(req.body, 'req.body');
   try {
     const d = req.body;
     const doctor = await Doctor.create({
@@ -37,7 +37,6 @@ async function getAll(req, res) {
     const doctor = await Doctor.find({
       user: req.user._id
     });
-    console.log(doctor, "doctor");
     res.status(200).json({
       doctor: doctor
     });
@@ -57,6 +56,27 @@ async function getOne(req, res) {
     });
   } catch (err) {
     console.log(err, "get one controller");
+    res.status(400).json({
+      err
+    })
+  }
+}
+
+async function update(req, res) {
+  const doc = req.body;
+  try {
+    const doctor = await Doctor.findById(req.params.id);
+    doctor.hours = doc.hours,
+      doctor.name = doc.name,
+      doctor.notes = doc.notes,
+      doctor.phoneNum = doc.phoneNum,
+      doctor.save();
+
+    res.status(201).json({
+      doctor
+    });
+
+  } catch {
     res.status(400).json({
       err
     })

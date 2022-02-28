@@ -9,7 +9,6 @@ import Loading from "../../components/Loader/Loader";
 export default function Feed({ user, handleLogout }) {
   const [meds, setMeds] = useState([]);
   const [loading, setLoading] = useState(true);
-  // console.log(meds, "state")
   async function getMeds() {
     try {
       const data = await medicationApi.getAll();

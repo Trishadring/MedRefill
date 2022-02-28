@@ -10,7 +10,7 @@ function ProviderCard({ providers, type }) {
         <Segment.Group>
           {providers.map((provider) => {
             return (
-              <ProviderDetails key={provider._id} type="provider" doctor={provider} />
+              <ProviderDetails key={provider._id} type={type} doctor={provider} />
             );
           })}
         </Segment.Group>

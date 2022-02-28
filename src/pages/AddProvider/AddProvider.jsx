@@ -13,7 +13,6 @@ function AddProvider({ user, type }) {
   if (type === "Doctor") { API = doctorApi }
   if (type === "Pharmacy") { API = pharmacyApi }
   const id = useParams();
-  console.log(id, "params");
   const [state, setState] = useState({
     name: '',
     phoneNum: '',
@@ -35,9 +34,8 @@ function AddProvider({ user, type }) {
     for (let key in state) {
       formData.append(key, state[key])
     }
-    // console.log(state, "state")
     try {
-      API.create(state)
+      { id ? API.update(state, id.id) : API.create(state) }
       navigate(`/${user.username}`);
     } catch (err) {
       console.log(err)
@@ -49,7 +47,6 @@ function AddProvider({ user, type }) {
   async function getMed() {
     try {
       const results = await API.getOne(id.id);
-      console.log(results, "data");
       let data = results.provider;
       setLoading(() => false);
       setState({
@@ -62,7 +59,6 @@ function AddProvider({ user, type }) {
     } catch (err) {
       console.log(err.message, "-- this is the error");
       setLoading(() => false);
-      // setError(err.message);
     }
   }
 
@@ -95,7 +91,7 @@ function AddProvider({ user, type }) {
       <Grid.Row>
         <Grid.Column style={{ maxWidth: 600 }}>
           <Segment>
-            <Header as='h2'>Add A {type}</Header>
+            <Header as='h2'>{id ? "Edit" : "Add"} A {type}</Header>
             <Form onSubmit={handleSubmit}>
               <Form.Group widths='equal'>
                 <Form.Input fluid
@@ -118,7 +114,7 @@ function AddProvider({ user, type }) {
                 onChange={handleChange}
                 name='notes'
                 value={state.notes} />
-              <Button type='submit'>Submit</Button>
+              <Button type='submit'>{id ? "Update" : "Submit"}</Button>
             </Form>
           </Segment>
         </Grid.Column>

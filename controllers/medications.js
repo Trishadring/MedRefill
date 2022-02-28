@@ -23,7 +23,6 @@ async function create(req, res) {
   const med = req.body;
   const today = new Date();
   const refillDate = addDays(med.numPillsLeft, numPerDay, today);
-  console.log(refillDate, "refillDate")
   try {
     const medication = await Medication.create({
       medName: med.medName,
@@ -81,7 +80,6 @@ async function updateFill(req, res) {
 
   try {
     Medication.findById(req.params.id, function (err, medication) {
-      console.log(medication)
       const dates = new Date(medication.refillDate);
       const refillDate = addDays(medication.qtyPerFill, medication.numPerDay, dates);
       medication.refillDate = new Date(refillDate)
@@ -99,11 +97,9 @@ async function updateFill(req, res) {
 
 async function updateMed(req, res) {
   const med = req.body;
-  console.log(med, "meds")
   const numPerDay = parseInt(med.numPerDay);
   const today = new Date();
   const refillDate = addDays(med.numPillsLeft, numPerDay, today);
-  console.log(refillDate, "refillDate")
   try {
     Medication.findById(req.params.id, function (err, medication) {
       medication.medName = med.medName,

@@ -4,7 +4,6 @@ import * as medicationApi from "../../../../utils/medicationApi";
 
 
 function UpdateFill({ med_id }) {
-  // console.log(med_id, "med id on update fill")
   const [state, setState] = useState({
     lastFilled: '',
   })
@@ -13,7 +12,6 @@ function UpdateFill({ med_id }) {
       ...state,
       [e.target.name]: e.target.value
     })
-    // console.log(state, "state on updatefill component")
   }
   function handleSubmit(e) {
     e.preventDefault()

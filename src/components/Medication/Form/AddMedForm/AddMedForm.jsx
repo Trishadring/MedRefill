@@ -6,7 +6,6 @@ import * as medicationApi from "../../../../utils/medicationApi";
 
 
 function AddMedForm({ predata }) {
-  console.log(predata);
   const navigate = useNavigate();
   const [state, setState] = useState({
     medName: '',

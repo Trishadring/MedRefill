@@ -17,11 +17,6 @@ module.exports = {
 };
 
 function signup(req, res) {
-  console.log(req.body, req.file)
-
-  //////////////////////////////////////////////////////////////////////////////////
-  //////////////////////////////////////////////////////////////////////////////////
-  //////////////////////////////////////////////////////////////////////////////////
 
   // FilePath unique name to be saved to our bucket
   const filePath = `${uuidv4()}/${req.file.originalname}`
@@ -33,7 +28,6 @@ function signup(req, res) {
   //your bucket name goes where collector cat is 
   //////////////////////////////////////////////////////////////////////////////////
   s3.upload(params, async function (err, data) {
-    console.log(data, 'from aws') // data.Location is our photoUrl that exists on aws
     const user = new User({
       ...req.body,
       photoUrl: data.Location
@@ -61,7 +55,6 @@ async function login(req, res) {
     const user = await User.findOne({
       email: req.body.email
     });
-    console.log(user, ' this user in login')
     if (!user) return res.status(401).json({
       err: 'bad credentials'
     });
@@ -85,14 +78,12 @@ async function login(req, res) {
 }
 
 async function profile(req, res) {
-  console.log(req.params.username, "req.params.username")
   try {
     // First find the user using the params from the request
     // findOne finds first match, its useful to have unique usernames!
     const user = await User.findOne({
       username: req.params.username
     })
-    console.log(user, "user")
     // Then find all the posts that belong to that user
     if (!user) return res.status(404).json({
       err: 'User not found'
@@ -104,7 +95,6 @@ async function profile(req, res) {
     const pharmacies = await Pharmacy.find({
       user: user._id
     }).populate("user").exec();
-    console.log(doctors, ' this doctors')
     res.status(200).json({
       doctors: doctors,
       user: user,

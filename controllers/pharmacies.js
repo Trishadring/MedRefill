@@ -3,11 +3,11 @@ const Pharmacy = require('../models/pharmacy');
 module.exports = {
   create,
   getAll,
-  getOne
+  getOne,
+  update
 }
 
 async function create(req, res) {
-  console.log(req.body, 'req.body');
   try {
     const d = req.body;
     const pharmacy = await Pharmacy.create({
@@ -36,7 +36,6 @@ async function getAll(req, res) {
     const pharmacy = await Pharmacy.find({
       user: req.user._id
     });
-    console.log(pharmacy, "pharmacy");
     res.status(200).json({
       pharmacy: pharmacy
     });
@@ -51,13 +50,31 @@ async function getAll(req, res) {
 async function getOne(req, res) {
   try {
     const pharmacy = await Pharmacy.findById(req.params.id)
-    console.log(pharmacy, "pharmacy")
-    console.log(req.params, "pharmacy")
     res.status(200).json({
       provider: pharmacy
     });
   } catch (err) {
     console.log(err, "get one controller");
+    res.status(400).json({
+      err
+    })
+  }
+}
+
+async function update(req, res) {
+  const pharm = req.body;
+  try {
+    Pharmacy.findById(req.params.id, function (err, pharmacy) {
+      pharmacy.hours = pharm.hours,
+      pharmacy.name = pharm.name,
+      pharmacy.notes = pharm.notes,
+      pharmacy.phoneNum = pharm.phoneNum,
+      pharmacy.save();
+      res.status(201).json({
+        pharmacy
+      })
+    });
+  } catch {
     res.status(400).json({
       err
     })

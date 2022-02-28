@@ -19,7 +19,6 @@ export function create(medication) {
 }
 
 export function getAll() {
-  // console.log('got to line 23 on api')
   return fetch(BASE_URL, {
       headers: {
         'Authorization': 'Bearer ' + tokenService.getToken(),
@@ -31,7 +30,6 @@ export function getAll() {
 }
 
 export function getOne(oneMed) {
-  console.log(oneMed, 'medId')
   return fetch(`${BASE_URL}/${oneMed}`, {
       headers: {
         'Authorization': 'Bearer ' + tokenService.getToken(),
@@ -43,8 +41,6 @@ export function getOne(oneMed) {
 }
 
 export function updateFill(newFillDate, oneMed) {
-  console.log(oneMed, 'medId')
-  console.log(newFillDate.lastFilled, 'newFillDate')
   return fetch(`${BASE_URL}/${oneMed}/updateFill`, {
       method: 'PUT',
       body: JSON.stringify(newFillDate),
@@ -58,7 +54,6 @@ export function updateFill(newFillDate, oneMed) {
 }
 
 export function changeDoc(oneMed, id) {
-  console.log(oneMed, id, "med + id")
   const body = {
     'id': `${id}`
   };
@@ -75,7 +70,6 @@ export function changeDoc(oneMed, id) {
 }
 
 export function changePharmacy(oneMed, id) {
-  console.log(oneMed, id, "med + id")
   const body = {
     'id': `${id}`
   };
@@ -92,8 +86,6 @@ export function changePharmacy(oneMed, id) {
 }
 
 export function update(details, oneMed) {
-  console.log(oneMed, 'medId')
-  console.log(details, "details")
   return fetch(`${BASE_URL}/${oneMed}/updateMed`, {
       method: 'PUT',
       body: JSON.stringify(details),

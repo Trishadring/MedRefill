@@ -7,5 +7,6 @@ const doctorsCtrl = require('../../controllers/doctors');
 router.post('/', doctorsCtrl.create)
 router.get('/', doctorsCtrl.getAll)
 router.get('/:id', doctorsCtrl.getOne)
+router.put('/:id/update', doctorsCtrl.update)
 
 module.exports = router;
