@@ -1,30 +1,33 @@
 import React, { useState, useEffect } from "react";
 import { Card } from "semantic-ui-react";
-import AddDoctor from '../Forms/AddDoctor/AddDoctor';
-import DoctorDetails from '../DoctorDetails/DoctorDetails';
-import * as doctorApi from "../../../utils/doctorApi";
+import LinkPharmacy from '../LinkPharmacy/LinkPharmacy';
+import DoctorDetails from '../../Doctor/DoctorDetails/DoctorDetails';
+import * as pharmacyApi from "../../../utils/pharmacyApi";
 
 
-function DoctorCard({ med_id, doctor }) {
-  const [docKey, setdocKey] = useState([]);
-  async function getDoctors() {
+function PharmacyCard({ med_id, pharmacy }) {
+  console.log(pharmacy , "pharmacy")
+  const [pharmKey, setPharmKey] = useState([]);
+  async function getPharmacies() {
     try {
-      const data = await doctorApi.getAll();
-      if (docKey.length < 1) {
-        getNames(data.doctor);
+      const data = await pharmacyApi.getAll();
+      console.log(data, "data")
+      if (pharmKey.length < 1) {
+        getNames(data.pharmacy);
       }
     } catch (err) {
       console.log(err.message, " this is the error");
     }
   }
 
-  function getNames(doctors) {
+  function getNames(pharmacies) {
     try {
-      doctors.forEach((doc) => {
-        setdocKey(prevItems => [...prevItems, {
-          key: doc._id,
-          text: doc.name,
-          value: doc._id
+      pharmacies.forEach((p) => {
+        console.log('try')
+        setPharmKey(prevItems => [...prevItems, {
+          key: p._id,
+          text: p.name,
+          value: p._id
         }]);
       });
     }
@@ -33,19 +36,19 @@ function DoctorCard({ med_id, doctor }) {
     }
   }
   useEffect(() => {
-    getDoctors();
+    getPharmacies();
   }, []);
 
 
   return (
     <Card>
       <Card.Content>
-        <Card.Header>Doctor</Card.Header>
+        <Card.Header>Pharmacy</Card.Header>
         <Card.Meta>
         </Card.Meta>
-        {doctor ? <DoctorDetails doctor={doctor} /> : ""}
+        {pharmacy ? <DoctorDetails doctor={pharmacy} /> : "No Pharmacy Yet"}
         <Card.Content>
-          <AddDoctor docKey={docKey} med_id={med_id} />
+          <LinkPharmacy pharmKey={pharmKey} med_id={med_id} />
         </Card.Content>
 
         <Card.Content extra>
@@ -55,4 +58,4 @@ function DoctorCard({ med_id, doctor }) {
   )
 }
 
-export default DoctorCard;
+export default PharmacyCard;

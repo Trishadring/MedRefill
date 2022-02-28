@@ -1,4 +1,3 @@
-
 import tokenService from "./tokenService";
 
 const BASE_URL = '/api/pharmacy';
@@ -18,4 +17,15 @@ export function create(pharmacy) {
     if (res.ok) return res.json();
     throw new Error('Error in creating the pharmacy, Check your express terminal!')
   })
+}
+
+export function getAll() {
+  return fetch(BASE_URL, {
+      headers: {
+        'Authorization': 'Bearer ' + tokenService.getToken(),
+        "Content-Type": "application/json",
+        'Accept': 'application/json'
+      }
+    })
+    .then(res => res.json());
 }

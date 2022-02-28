@@ -4,9 +4,10 @@ import { Link, Navigate, Route, Routes } from "react-router-dom";
 import UpdateFill from "../Form/UpdateFill/UpdateFill"
 import MedCard from '../MedCard/MedCard'
 import DoctorCard from '../../Doctor/DoctorCard/DoctorCard'
+import PharmacyCard from '../../Pharmacy/PharmacyCard/PharmacyCard'
 
 function FullMedCard({ medication }) {
-
+  console.log(medication, "has medication")
   return (
     <Card.Group itemsPerRow={2}>
       <MedCard medication={medication} />
@@ -22,6 +23,8 @@ function FullMedCard({ medication }) {
         </Card.Content>
       </Card>
       <DoctorCard med_id={medication._id} doctor={medication.doctor} />
+      <PharmacyCard med_id={medication._id} pharmacy={medication.pharmacy} />
+
 
     </Card.Group>
   )

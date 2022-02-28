@@ -75,9 +75,13 @@ export function changeDoc(oneMed, id) {
 }
 
 export function changePharmacy(oneMed, id) {
-  return fetch(`${BASE_URL}/${oneMed}/changePharmacy`, {
+  console.log(oneMed, id, "med + id")
+  const body = {
+    'id': `${id}`
+  };
+  return fetch(`${BASE_URL}/${oneMed}/updatePharmacy`, {
       method: 'PUT',
-      body: JSON.stringify(id),
+      body: JSON.stringify(body),
       headers: {
         'Authorization': 'Bearer ' + tokenService.getToken(),
         "Content-Type": "application/json",

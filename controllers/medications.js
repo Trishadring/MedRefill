@@ -8,7 +8,8 @@ module.exports = {
   getOne,
   updateFill,
   updateDoc,
-  updateMed
+  updateMed,
+  updatePharmacy
 }
 
 function addDays(pills, numPerDay, result) {
@@ -64,7 +65,7 @@ async function index(req, res) {
 
 async function getOne(req, res) {
   try {
-    const medication = await Medication.findById(req.params.id).populate('doctor')
+    const medication = await Medication.findById(req.params.id).populate('doctor').populate('pharmacy')
     res.status(200).json({
       medication
     });
@@ -142,21 +143,20 @@ async function updateDoc(req, res) {
   }
 }
 
-// async function updateDoc(req, res) {
-//   console.log(req.params.id, "params")
-//   try {
-//     console.log(req.body, "bodddyd")
-//     Medication.findById(req.params.id, function (err, medication) {
-//       medication.doctor = req.body._id
-//       console.log(medication)
-//       medication.save(function (err) {
-//         console.log(medication, "medication saved?");
-//       });
-//     });
-//   } catch {
-//     console.log(err, "updateDoc controller");
-//     res.status(400).json({
-//       err
-//     })
-//   }
-// }
+
+async function updatePharmacy(req, res) {
+  try {
+    let medication = await Medication.findById(req.params.id)
+    if (!medication) return "medication not found"
+    medication.pharmacy = req.body.id
+    medication.save();
+    res.status(200).json({
+      medication
+    });
+  } catch (err) {
+    console.log(err, "updatePharmacy controller");
+    res.status(400).json({
+      err
+    })
+  }
+}

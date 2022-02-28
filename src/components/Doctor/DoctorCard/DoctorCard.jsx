@@ -6,6 +6,7 @@ import * as doctorApi from "../../../utils/doctorApi";
 
 
 function DoctorCard({ med_id, doctor }) {
+  console.log(doctor, "has a doctor")
   const [docKey, setdocKey] = useState([]);
   async function getDoctors() {
     try {
@@ -43,7 +44,7 @@ function DoctorCard({ med_id, doctor }) {
         <Card.Header>Doctor</Card.Header>
         <Card.Meta>
         </Card.Meta>
-        {doctor ? <DoctorDetails doctor={doctor} /> : ""}
+        {doctor ? <DoctorDetails doctor={doctor} /> : "No Doctor Yet"}
         <Card.Content>
           <AddDoctor docKey={docKey} med_id={med_id} />
         </Card.Content>

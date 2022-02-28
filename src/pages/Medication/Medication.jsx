@@ -6,7 +6,8 @@ import * as medicationApi from "../../utils/medicationApi";
 import { Grid } from "semantic-ui-react";
 import Loading from "../../components/Loader/Loader";
 
-export default function Feed() {
+export default function Feed({ user }) {
+  console.log(user, "user")
   const [meds, setMeds] = useState([]);
   const [loading, setLoading] = useState(true);
   const id = useParams();
@@ -28,7 +29,7 @@ export default function Feed() {
   if (loading) {
     return (
       <>
-        <Nav />
+        <Nav user={user} />
         <Loading />
       </>
     );
@@ -38,11 +39,13 @@ export default function Feed() {
     <Grid centered>
       <Grid.Row>
         <Grid.Column>
-          <Nav />
+          <Nav user={user} />
         </Grid.Column>
       </Grid.Row>
       <Grid.Row>
-        <FullMedCard medication={meds} />
+        <Grid.Column style={{ maxWidth: 900 }}>
+          <FullMedCard medication={meds} />
+        </Grid.Column>
       </Grid.Row>
     </Grid>
   )
