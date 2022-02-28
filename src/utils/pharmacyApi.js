@@ -29,3 +29,29 @@ export function getAll() {
     })
     .then(res => res.json());
 }
+
+export function getOne(id) {
+  return fetch(`${BASE_URL}/${id}`, {
+      headers: {
+        'Authorization': 'Bearer ' + tokenService.getToken(),
+        "Content-Type": "application/json",
+        'Accept': 'application/json'
+      }
+    })
+    .then(res => res.json());
+}
+
+export function update(details, oneMed) {
+  console.log(oneMed, 'medId')
+  console.log(details, "details")
+  return fetch(`${BASE_URL}/${oneMed}/updateMed`, {
+      method: 'PUT',
+      body: JSON.stringify(details),
+      headers: {
+        'Authorization': 'Bearer ' + tokenService.getToken(),
+        "Content-Type": "application/json",
+        'Accept': 'application/json'
+      }
+    })
+    .then(res => res.json());
+}

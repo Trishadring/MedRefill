@@ -29,3 +29,14 @@ export function getAll() {
     })
     .then(res => res.json());
 }
+
+export function getOne(id) {
+  return fetch(`${BASE_URL}/${id}`, {
+      headers: {
+        'Authorization': 'Bearer ' + tokenService.getToken(),
+        "Content-Type": "application/json",
+        'Accept': 'application/json'
+      }
+    })
+    .then(res => res.json());
+}

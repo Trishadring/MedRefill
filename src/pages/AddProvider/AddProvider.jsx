@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Grid, Segment, Button, Header, Form } from 'semantic-ui-react'
 import { useParams } from "react-router-dom";
 import * as doctorApi from "../../utils/doctorApi";
 import * as pharmacyApi from "../../utils/pharmacyApi";
+import * as medicationApi from "../../utils/medicationApi";
 import Nav from '../../components/Nav/Nav'
 import { useNavigate } from "react-router-dom";
+import Loading from "../../components/Loader/Loader";
 
 function AddProvider({ user, type }) {
   let API = "";
@@ -18,6 +20,7 @@ function AddProvider({ user, type }) {
     hours: '',
     notes: '',
   })
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
   function handleChange(e) {
     setState({
@@ -40,6 +43,47 @@ function AddProvider({ user, type }) {
       console.log(err)
     }
 
+  }
+
+
+  async function getMed() {
+    try {
+      const results = await API.getOne(id.id);
+      console.log(results, "data");
+      let data = results.provider;
+      setLoading(() => false);
+      setState({
+        name: data.name,
+        phoneNum: data.phoneNum,
+        hours: data.hours,
+        notes: data.notes,
+      })
+      setLoading(() => false);
+    } catch (err) {
+      console.log(err.message, "-- this is the error");
+      setLoading(() => false);
+      // setError(err.message);
+    }
+  }
+
+
+
+  useEffect(() => {
+    if (id) {
+      getMed();
+    } else {
+      setLoading(() => false);
+    }
+
+  }, []);
+
+  if (loading) {
+    return (
+      <>
+        <Nav user={user} />
+        <Loading />
+      </>
+    );
   }
   return (
     <Grid centered>

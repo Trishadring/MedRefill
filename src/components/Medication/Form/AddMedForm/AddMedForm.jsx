@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Grid, Segment, Button, Header, Form } from 'semantic-ui-react'
+import { useNavigate } from "react-router-dom";
 import * as medicationApi from "../../../../utils/medicationApi";
 
 
 
 function AddMedForm({ predata }) {
   console.log(predata);
-  if (predata) { console.log('yes') };
+  const navigate = useNavigate();
   const [state, setState] = useState({
     medName: '',
     medGenericName: '',
@@ -31,11 +32,11 @@ function AddMedForm({ predata }) {
       formData.append(key, state[key])
     }
     try {
-      medicationApi.create(state)
+      { predata ? medicationApi.update(state, predata._id) : medicationApi.create(state) }
+      navigate("/");
     } catch (err) {
       console.log(err)
     }
-
   }
 
   function preLoadFormData() {

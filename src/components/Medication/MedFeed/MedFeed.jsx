@@ -9,7 +9,7 @@ function MedFeed({ medication, loading, user }) {
     <Card.Group itemsPerRow={2} stackable>
       {medication.map((medication) => {
         return (
-          <MedCard medication={medication} user={user} />
+          <MedCard key={medication._id} medication={medication} user={user} />
         );
       })}
     </Card.Group>

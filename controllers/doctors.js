@@ -4,7 +4,8 @@ const Doctor = require('../models/doctor');
 
 module.exports = {
   create,
-  getAll
+  getAll,
+  getOne
 }
 
 async function create(req, res) {
@@ -18,10 +19,14 @@ async function create(req, res) {
       hours: d.hours,
       notes: d.notes
     });
-    res.status(201).json({ doctor: doctor })
+    res.status(201).json({
+      doctor: doctor
+    })
   } catch (e) {
     console.log(e)
-    res.status(400).json({ e })
+    res.status(400).json({
+      e
+    })
   }
 
 }
@@ -29,11 +34,31 @@ async function create(req, res) {
 async function getAll(req, res) {
 
   try {
-    const doctor = await Doctor.find({user: req.user._id});
+    const doctor = await Doctor.find({
+      user: req.user._id
+    });
     console.log(doctor, "doctor");
-    res.status(200).json({ doctor: doctor });
+    res.status(200).json({
+      doctor: doctor
+    });
   } catch (err) {
     console.log(err);
-    res.status(400).json({ err })
+    res.status(400).json({
+      err
+    })
+  }
+}
+
+async function getOne(req, res) {
+  try {
+    const doctor = await Doctor.findById(req.params.id)
+    res.status(200).json({
+      provider: doctor
+    });
+  } catch (err) {
+    console.log(err, "get one controller");
+    res.status(400).json({
+      err
+    })
   }
 }

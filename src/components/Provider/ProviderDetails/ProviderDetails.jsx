@@ -5,8 +5,10 @@ import "./ProviderDetails.css"
 
 function ProviderDetails({ doctor, type }) {
   const navigate = useNavigate();
-  function edit() {
+  function edit(e) {
+    e.preventDefault()
     navigate(`/${type}/edit/${doctor._id}`);
+
   }
 
   return (
@@ -16,7 +18,7 @@ function ProviderDetails({ doctor, type }) {
       <p> {doctor.phoneNum}</p>
       <p> {doctor.notes}</p>
       <Button.Group basic size='small' className="buttons">
-        <Button icon='edit' onClick={edit()} />
+        <Button icon='edit' onClick={edit} />
         <Button icon='trash alternate' />
       </Button.Group>
     </Segment >
