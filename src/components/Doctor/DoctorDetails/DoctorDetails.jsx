@@ -1,24 +1,16 @@
 import React from "react";
-import { Card } from "semantic-ui-react";
+import { Segment, Header } from "semantic-ui-react";
 
 
 function DoctorDetails({ doctor }) {
 
   return (
-    <Card fluid >
-      <Card.Content>
-        <Card.Header>{doctor.name}</Card.Header>
-        <Card.Meta>
-          Hours: {doctor.hours}
-        </Card.Meta>
-        <Card.Content>
-          {doctor.phoneNum}
-        </Card.Content>
-        <Card.Content extra>
-          {doctor.notes}
-        </Card.Content>
-      </Card.Content>
-    </Card >
+    <Segment>
+      <Header as='h4'>{doctor.name}</Header>
+      <p>Hours: {doctor.hours}</p>
+      <p> {doctor.phoneNum}</p>
+      <p> {doctor.notes}</p>
+    </Segment >
   )
 }
 

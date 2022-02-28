@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
-import { Grid, Card } from "semantic-ui-react";
+import { Grid, Card, Segment } from "semantic-ui-react";
 import Nav from "../../components/Nav/Nav";
 import Loading from "../../components/Loader/Loader";
 import DoctorDetails from '../../components/Doctor/DoctorDetails/DoctorDetails'
 import userService from "../../utils/userService";
 import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
+import ProfileBio from '../../components/ProfileBio/ProfileBio'
 import { useParams, Link } from "react-router-dom";
 // import * as likesAPI from "../../utils/likeApi";
 
@@ -66,7 +67,7 @@ export default function ProfilePage(props) {
       </Grid.Row>
       <Grid.Row>
         <Grid.Column>
-          {/* <ProfileBio user={user} /> */}
+          <ProfileBio user={user} />
         </Grid.Column>
       </Grid.Row>
       <Grid.Row centered>
@@ -74,13 +75,13 @@ export default function ProfilePage(props) {
           <Card>
             <Card.Content>
               <Card.Header>List of Doctors</Card.Header>
-              <Card.Group itemsPerRow={1} stackable>
+              <Segment.Group>
                 {doctors.map((doctor) => {
                   return (
                     <DoctorDetails doctor={doctor} />
                   );
                 })}
-              </Card.Group>
+              </Segment.Group>
               <Link to="/Doctor">Add A Doctor</Link>
             </Card.Content>
           </Card>
