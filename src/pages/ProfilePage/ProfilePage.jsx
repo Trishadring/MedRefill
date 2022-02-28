@@ -6,6 +6,7 @@ import DoctorDetails from '../../components/Doctor/DoctorDetails/DoctorDetails'
 import userService from "../../utils/userService";
 import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 import ProfileBio from '../../components/ProfileBio/ProfileBio'
+import ProfileFeed from '../../components/Provider/ProviderFeed/ProviderFeed'
 import { useParams, Link } from "react-router-dom";
 // import * as likesAPI from "../../utils/likeApi";
 
@@ -71,38 +72,8 @@ export default function ProfilePage(props) {
       </Grid.Row>
       <Grid.Row centered>
         <Grid.Column style={{ maxWidth: 800 }}>
-          <Card.Group itemsPerRow={2} stackable>
-            <Card fluid>
-              <Card.Content>
-                <Card.Header>List of Doctors</Card.Header>
-                <Segment.Group>
-                  {doctors.map((doctor) => {
-                    return (
-                      <DoctorDetails type="doctor" doctor={doctor} />
-                    );
-                  })}
-                </Segment.Group>
-                <Button>
-                  <Link to="/Doctor">Add A Doctor</Link>
-                </Button>
-              </Card.Content>
-            </Card>
-            <Card fluid>
-              <Card.Content>
-                <Card.Header>List of Pharmacies</Card.Header>
-                <Segment.Group>
-                  {pharmacies.map((pharmacy) => {
-                    return (
-                      <DoctorDetails type="pharmacy" doctor={pharmacy} />
-                    );
-                  })}
-                </Segment.Group>
-                <Button>
-                  <Link to="/Pharmacy">Add A Pharmacy</Link>
-                </Button>
-              </Card.Content>
-            </Card>
-          </Card.Group>
+          <ProfileFeed doctors={doctors} pharmacies={pharmacies} />
+         
         </Grid.Column>
       </Grid.Row>
     </Grid>

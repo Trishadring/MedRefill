@@ -3,7 +3,6 @@ import { Segment, Header, Button, Icon } from "semantic-ui-react";
 import "./DoctorDetails.css"
 
 function DoctorDetails({ doctor, type }) {
-  console.log(type, doctor, "what is my type")
   return (
     <Segment className="provider-enclosure">
       <Header as='h4'>{doctor.name}</Header>
