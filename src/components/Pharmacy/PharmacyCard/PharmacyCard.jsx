@@ -6,7 +6,7 @@ import * as pharmacyApi from "../../../utils/pharmacyApi";
 
 
 function PharmacyCard({ med_id, pharmacy }) {
-  console.log(pharmacy , "pharmacy")
+  console.log(pharmacy, "pharmacy")
   const [pharmKey, setPharmKey] = useState([]);
   async function getPharmacies() {
     try {

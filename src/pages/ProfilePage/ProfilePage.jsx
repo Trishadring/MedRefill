@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Grid, Card, Segment } from "semantic-ui-react";
+import { Grid, Card, Segment, Button } from "semantic-ui-react";
 import Nav from "../../components/Nav/Nav";
 import Loading from "../../components/Loader/Loader";
 import DoctorDetails from '../../components/Doctor/DoctorDetails/DoctorDetails'
@@ -20,12 +20,9 @@ export default function ProfilePage(props) {
   // we defined username in the app.js /:username
   const { username } = useParams();
 
-  console.log(username, " <----- this username");
-
   async function getProfile() {
     try {
       const data = await userService.getProfile(username);
-      console.log(data, " <- data");
 
       setLoading(() => false);
       setDoctors(() => data.doctors);
@@ -81,11 +78,13 @@ export default function ProfilePage(props) {
                 <Segment.Group>
                   {doctors.map((doctor) => {
                     return (
-                      <DoctorDetails doctor={doctor} />
+                      <DoctorDetails type="doctor" doctor={doctor} />
                     );
                   })}
                 </Segment.Group>
-                <Link to="/Doctor">Add A Doctor</Link>
+                <Button>
+                  <Link to="/Doctor">Add A Doctor</Link>
+                </Button>
               </Card.Content>
             </Card>
             <Card fluid>
@@ -94,11 +93,13 @@ export default function ProfilePage(props) {
                 <Segment.Group>
                   {pharmacies.map((pharmacy) => {
                     return (
-                      <DoctorDetails doctor={pharmacy} />
+                      <DoctorDetails type="pharmacy" doctor={pharmacy} />
                     );
                   })}
                 </Segment.Group>
-                <Link to="/Pharmacy">Add A Pharmacy</Link>
+                <Button>
+                  <Link to="/Pharmacy">Add A Pharmacy</Link>
+                </Button>
               </Card.Content>
             </Card>
           </Card.Group>

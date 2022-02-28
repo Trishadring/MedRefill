@@ -1,3 +1,13 @@
-.provider-enclosure{
+.provider-enclosure {
   position: relative;
+}
+
+.buttons {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+}
+
+h4 {
+  max-width: 80%;
 }

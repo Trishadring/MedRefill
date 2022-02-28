@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { Header, Segment, Icon, Image } from "semantic-ui-react";
 
 function Nav({ user, handleLogout }) {
-  console.log(user, 'user in header')
   return (
     <Segment clearing>
       <Header as="h2" floated="right">

@@ -1,10 +1,14 @@
 import React, { useState } from "react";
 import { Grid, Segment, Button, Header, Form } from 'semantic-ui-react'
 import * as doctorApi from "../../utils/doctorApi";
+import * as pharmacyApi from "../../utils/pharmacyApi";
 import Nav from '../../components/Nav/Nav'
 import { useNavigate } from "react-router-dom";
 
-function AddProvider({ user }) {
+function AddProvider({ user, type }) {
+  let API = "";
+  if (type === "Doctor") { API = doctorApi }
+  if (type === "Pharmacy") { API = pharmacyApi }
   const [state, setState] = useState({
     name: '',
     phoneNum: '',
@@ -27,8 +31,8 @@ function AddProvider({ user }) {
     }
     // console.log(state, "state")
     try {
-      doctorApi.create(state)
-      navigate(`\${user.username}`);
+      API.create(state)
+      navigate(`/${user.username}`);
     } catch (err) {
       console.log(err)
     }
@@ -44,19 +48,19 @@ function AddProvider({ user }) {
       <Grid.Row>
         <Grid.Column style={{ maxWidth: 600 }}>
           <Segment>
-            <Header as='h2'>Add A Doctor</Header>
+            <Header as='h2'>Add A {type}</Header>
             <Form onSubmit={handleSubmit}>
               <Form.Group widths='equal'>
                 <Form.Input fluid
-                  label='Doctors name'
-                  placeholder='Doctors name'
+                  label="Name"
+                  placeholder="Name"
                   onChange={handleChange}
                   name='name'
                   value={state.name}
                 />
               </Form.Group>
               <Form.Group widths='equal'>
-                <Form.Input fluid label='hours' placeholder='hours' onChange={handleChange}
+                <Form.Input fluid label='Hours' placeholder='Hours' onChange={handleChange}
                   name='hours'
                   value={state.hours} />
                 <Form.Input fluid label='Phone Number' placeholder='(123)456-7890' onChange={handleChange}
