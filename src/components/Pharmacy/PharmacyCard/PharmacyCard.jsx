@@ -6,7 +6,6 @@ import * as pharmacyApi from "../../../utils/pharmacyApi";
 
 
 function PharmacyCard({ med_id, pharmacy }) {
-  console.log(pharmacy, "pharmacy")
   const [pharmKey, setPharmKey] = useState([]);
   async function getPharmacies() {
     try {
@@ -23,7 +22,6 @@ function PharmacyCard({ med_id, pharmacy }) {
   function getNames(pharmacies) {
     try {
       pharmacies.forEach((p) => {
-        console.log('try')
         setPharmKey(prevItems => [...prevItems, {
           key: p._id,
           text: p.name,

@@ -1,11 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Grid, Segment, Button, Header, Form } from 'semantic-ui-react'
 import * as medicationApi from "../../../../utils/medicationApi";
 
 
 
-function AddMedForm() {
-
+function AddMedForm({ predata }) {
+  console.log(predata);
+  if (predata) { console.log('yes') };
   const [state, setState] = useState({
     medName: '',
     medGenericName: '',
@@ -37,11 +38,30 @@ function AddMedForm() {
 
   }
 
+  function preLoadFormData() {
+    setState({
+      medName: predata.medName,
+      medGenericName: predata.medGenericName,
+      medDose: predata.medDose,
+      numPerDay: predata.numPerDay,
+      cost: predata.cost,
+      notes: predata.notes,
+      qtyPerFill: predata.qtyPerFill,
+    })
+  }
+
+  useEffect(() => {
+    if (predata) {
+      preLoadFormData();
+    }
+
+  }, []);
+
   return (
     <Grid textAlign='center' verticalAlign='middle'>
       <Grid.Column style={{ maxWidth: 450 }}>
         <Segment>
-          <Header as='h2'>Add A Medication</Header>
+          <Header as='h2'>{predata ? "Edit" : "Add"} A Medication</Header>
           <Form onSubmit={handleSubmit}>
             <Form.Group widths='equal'>
               <Form.Input fluid
@@ -59,7 +79,6 @@ function AddMedForm() {
             <Form.Group widths='equal'>
               <Form.Input fluid label='Dosage' placeholder='Dosage'
                 onChange={handleChange}
-                type='number'
                 name='medDose'
                 value={state.medDose} />
               <Form.Input fluid label='How many pills you have left' placeholder='# of pills'
@@ -84,7 +103,7 @@ function AddMedForm() {
               onChange={handleChange}
               name='notes'
               value={state.notes} />
-            <Button type='submit'>Submit</Button>
+            <Button type='submit'>{predata ? "Update" : "Submit"}</Button>
           </Form>
         </Segment>
       </Grid.Column>

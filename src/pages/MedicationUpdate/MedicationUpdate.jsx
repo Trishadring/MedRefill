@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Nav from '../../components/Nav/Nav'
-import FullMedCard from '../../components/Medication/FullMedCard/FullMedCard'
-import EditMedForm from '../../components/Medication/Form/EditMedForm/EditMedForm'
+import AddMedForm from '../../components/Medication/Form/AddMedForm/AddMedForm'
 import Loading from "../../components/Loader/Loader";
 import * as medicationApi from "../../utils/medicationApi";
 import { Grid } from "semantic-ui-react";
 
-export default function MedicationUpdate() {
+export default function MedicationUpdate({ user }) {
   const [meds, setMeds] = useState([]);
   const [loading, setLoading] = useState(true);
   const id = useParams();
@@ -30,7 +29,7 @@ export default function MedicationUpdate() {
   if (loading) {
     return (
       <>
-        <Nav />
+        <Nav user={user} />
         <Loading />
       </>
     );
@@ -40,12 +39,12 @@ export default function MedicationUpdate() {
     <Grid centered>
       <Grid.Row>
         <Grid.Column>
-          <Nav />
+          <Nav user={user} />
         </Grid.Column>
       </Grid.Row>
       <Grid.Row>
         <Grid.Column style={{ maxWidth: 450 }}>
-          <EditMedForm predata={meds} />
+          <AddMedForm predata={meds} />
         </Grid.Column>
       </Grid.Row>
     </Grid>
