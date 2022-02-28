@@ -97,3 +97,4 @@ export function update(details, oneMed) {
     })
     .then(res => res.json());
 }
+

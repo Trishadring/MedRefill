@@ -6,7 +6,8 @@ module.exports = {
   create,
   getAll,
   getOne,
-  update
+  update,
+  deleteProvider
 }
 
 async function create(req, res) {
@@ -77,6 +78,20 @@ async function update(req, res) {
     });
 
   } catch {
+    res.status(400).json({
+      err
+    })
+  }
+}
+
+async function deleteProvider(req, res) {
+  try {
+    await Doctor.deleteOne({
+      _id: req.params.id
+    });
+    res.status(200).json({});
+  } catch (err) {
+    console.log(err, "get one controller");
     res.status(400).json({
       err
     })

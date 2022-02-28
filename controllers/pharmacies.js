@@ -4,7 +4,8 @@ module.exports = {
   create,
   getAll,
   getOne,
-  update
+  update,
+  deleteProvider
 }
 
 async function create(req, res) {
@@ -66,15 +67,29 @@ async function update(req, res) {
   try {
     Pharmacy.findById(req.params.id, function (err, pharmacy) {
       pharmacy.hours = pharm.hours,
-      pharmacy.name = pharm.name,
-      pharmacy.notes = pharm.notes,
-      pharmacy.phoneNum = pharm.phoneNum,
-      pharmacy.save();
+        pharmacy.name = pharm.name,
+        pharmacy.notes = pharm.notes,
+        pharmacy.phoneNum = pharm.phoneNum,
+        pharmacy.save();
       res.status(201).json({
         pharmacy
       })
     });
   } catch {
+    res.status(400).json({
+      err
+    })
+  }
+}
+
+async function deleteProvider(req, res) {
+  try {
+    await Pharmacy.deleteOne({
+      _id: req.params.id
+    });
+    res.status(200).json({});
+  } catch (err) {
+    console.log(err, "get one controller");
     res.status(400).json({
       err
     })

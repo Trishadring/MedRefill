@@ -3,7 +3,6 @@ import { Grid, Segment, Button, Header, Form } from 'semantic-ui-react'
 import { useParams } from "react-router-dom";
 import * as doctorApi from "../../utils/doctorApi";
 import * as pharmacyApi from "../../utils/pharmacyApi";
-import * as medicationApi from "../../utils/medicationApi";
 import Nav from '../../components/Nav/Nav'
 import { useNavigate } from "react-router-dom";
 import Loading from "../../components/Loader/Loader";
@@ -35,7 +34,7 @@ function AddProvider({ user, type }) {
       formData.append(key, state[key])
     }
     try {
-      { id ? API.update(state, id.id) : API.create(state) }
+      id ? API.update(state, id.id) : API.create(state) 
       navigate(`/${user.username}`);
     } catch (err) {
       console.log(err)
@@ -70,7 +69,6 @@ function AddProvider({ user, type }) {
     } else {
       setLoading(() => false);
     }
-
   }, []);
 
   if (loading) {

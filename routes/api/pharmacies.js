@@ -8,5 +8,6 @@ router.post('/', pharmaciesCtrl.create)
 router.get('/', pharmaciesCtrl.getAll)
 router.get('/:id', pharmaciesCtrl.getOne)
 router.put('/:id/update', pharmaciesCtrl.update)
+router.delete('/:id', pharmaciesCtrl.deleteProvider)
 
 module.exports = router;

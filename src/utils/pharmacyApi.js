@@ -52,3 +52,14 @@ export function update(details, id) {
     })
     .then(res => res.json());
 }
+export function deleteProvider(id) {
+  return fetch(`${BASE_URL}/${id}`, {
+      method: 'delete',
+      headers: {
+        'Authorization': 'Bearer ' + tokenService.getToken(),
+        "Content-Type": "application/json",
+        'Accept': 'application/json'
+      }
+    })
+    .then(res => res.json());
+}
