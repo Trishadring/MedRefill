@@ -39,7 +39,9 @@ export default function Feed({ user, handleLogout }) {
         </Grid.Column>
       </Grid.Row>
       <Grid.Row>
+        <Grid.Column style={{ maxWidth: 800 }}>
         <MedFeed medication={meds} user={user} loading={loading} />
+        </Grid.Column>
       </Grid.Row>
       <Grid.Row>
         <Grid.Column style={{ maxWidth: 450 }}>

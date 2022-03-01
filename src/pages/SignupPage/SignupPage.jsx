@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
-import { Button, Form, Grid, Header, Image, Segment } from "semantic-ui-react";
+import { Button, Form, Grid, Header, Segment } from "semantic-ui-react";
 
 import userService from "../../utils/userService";
 import { useNavigate, Navigate } from "react-router-dom";
 
 export default function SignUpPage(props) {
   const [error, setError] = useState('')
+  const navigate = useNavigate();
   const [selectedFile, setSelectedFile] = useState('');
   const [state, setState] = useState({
     username: '',
@@ -48,7 +49,7 @@ export default function SignUpPage(props) {
 
       // use the userService to make the fetch request
       await userService.signup(formData);
-
+      navigate("/");
       // Route to wherever you want!
       // after you get a response from the server from 
       // the signup request, you need to grab the token from 
@@ -101,7 +102,7 @@ export default function SignUpPage(props) {
               required
             />
             <Form.Field>
-              <Form.Input
+              <Form.Input required
                 type="file"
                 name="photo"
                 placeholder="upload image"

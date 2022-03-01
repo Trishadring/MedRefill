@@ -1,12 +1,15 @@
-import React from "react";
-import { Card, Icon, Image } from 'semantic-ui-react'
+import React, { useState, useEffect } from "react";
+import { Card, Icon } from 'semantic-ui-react'
 import { Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 
 function MedCard({ medication }) {
   const options = { weekday: 'long', month: 'long', day: 'numeric' };
+  const [onMedPage, setOnMedPage] = useState(false);
   const time = new Date(medication.refillDate);
   const newDate = time.toLocaleDateString(undefined, options);
+  const id = useParams();
 
   function howLong() {
     const today = new Date();
@@ -24,29 +27,46 @@ function MedCard({ medication }) {
     }
   }
 
+  useEffect(() => {
+    if (id.medId) {
+      setOnMedPage(() => true);
+      console.log(onMedPage, "has id")
+      console.log(medication)
+    }
+  }, [medication]);
+
   return (
     <Card key={medication._id}>
       <Card.Content>
         <Card.Header>
           {medication.medName} {medication.medDose}</Card.Header>
         <Card.Meta>{medication.medGenericName} {medication.medDose}</Card.Meta>
-        {/* <Card.Description>
-          Daniel is a comedian living in Nashville.
-        </Card.Description> */}
+        {onMedPage ?
+          <Card.Description>
+            <p>Pills per day: {medication.numPerDay}</p>
+            <p>Pills per Refill: {medication.qtyPerFill}</p>
+            <p>Notes: {medication.notes}</p>
+          </Card.Description>
+          : ""}
+
       </Card.Content>
       <Card.Content extra>
-        <Link to={`/medication/${medication._id}`}>
+        {!onMedPage ?
+          <Link to={`/medication/${medication._id}`}>
+            <p>
+              <Icon name='calendar outline' />
+              Refill Needed by {newDate}
+            </p>
+          </Link>
+          :
           <p>
             <Icon name='calendar outline' />
             Refill Needed by {newDate}
-          </p>
-        </Link>
+          </p>}
       </Card.Content>
       <Card.Content extra>
-        <a>
-          <Icon name='calendar outline' />
-          {howLong()}
-        </a>
+        <Icon name='calendar outline' />
+        {howLong()}
       </Card.Content>
     </Card >
   )

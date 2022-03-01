@@ -5,9 +5,9 @@ import LinkProvider from '../LinkProvider/LinkProvider'
 
 function ProviderMedCard({ med_id, providers, provider, type }) {
   const [options, setOptions] = useState([]);
-  console.log(providers, "providers")
 
   function getNames(providers) {
+    setOptions([]);
     try {
       providers.forEach((p) => {
         setOptions(prevItems => [...prevItems, {
@@ -22,10 +22,8 @@ function ProviderMedCard({ med_id, providers, provider, type }) {
     }
   }
   useEffect(() => {
-    if (options.length < 1) {
       getNames(providers);
-    }
-  }, []);
+  }, [providers]);
 
   return (
     <Card>

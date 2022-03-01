@@ -1,8 +1,6 @@
 import React from "react";
-import { Card, Button, Grid, Segment } from "semantic-ui-react";
+import { Card} from "semantic-ui-react";
 import ProviderCard from '../ProviderCard/ProviderCard';
-import DoctorDetails from '../ProviderDetails/ProviderDetails'
-import { useParams, Link } from "react-router-dom";
 
 function ProviderFeed({ doctors, pharmacies }) {
 

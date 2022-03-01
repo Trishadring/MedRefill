@@ -8,9 +8,7 @@ import { Grid } from "semantic-ui-react";
 
 export default function MedicationUpdate({ user }) {
   const [meds, setMeds] = useState([]);
-  const [providers, setProviders] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
   const id = useParams();
 
   async function getMed() {
@@ -21,7 +19,6 @@ export default function MedicationUpdate({ user }) {
       setLoading(() => false);
     } catch (err) {
       console.log(err.message, "-- this is the error");
-      // setError(err.message);
     }
   }
 
@@ -47,7 +44,7 @@ export default function MedicationUpdate({ user }) {
       </Grid.Row>
       <Grid.Row>
         <Grid.Column style={{ maxWidth: 450 }}>
-          <AddMedForm predata={meds} />
+          <AddMedForm preData={meds} />
         </Grid.Column>
       </Grid.Row>
     </Grid>

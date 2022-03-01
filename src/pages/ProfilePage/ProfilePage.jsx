@@ -1,13 +1,12 @@
 import { useState, useEffect } from "react";
-import { Grid, Card, Segment, Button } from "semantic-ui-react";
+import { Grid } from "semantic-ui-react";
 import Nav from "../../components/Nav/Nav";
 import Loading from "../../components/Loader/Loader";
 import userService from "../../utils/userService";
 import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 import ProfileBio from '../../components/ProfileBio/ProfileBio'
 import ProfileFeed from '../../components/Provider/ProviderFeed/ProviderFeed'
-import { useParams, Link } from "react-router-dom";
-// import * as likesAPI from "../../utils/likeApi";
+import { useParams } from "react-router-dom";
 
 export default function ProfilePage(props) {
   const [doctors, setDoctors] = useState([]);
@@ -20,24 +19,23 @@ export default function ProfilePage(props) {
   // we defined username in the app.js /:username
   const { username } = useParams();
 
-  async function getProfile() {
-    try {
-      const data = await userService.getProfile(username);
-
-      setLoading(() => false);
-      setDoctors(() => data.doctors);
-      setPharmacies(() => data.pharmacies);
-      setUser(() => data.user);
-    } catch (err) {
-      console.log(err);
-      setLoading(() => false);
-      setError("Profile Does not exist!");
-    }
-  }
-
   useEffect(() => {
+    async function getProfile() {
+      try {
+        const data = await userService.getProfile(username);
+        console.log(data);
+        setLoading(() => false);
+        setDoctors(() => data.doctors);
+        setPharmacies(() => data.pharmacies);
+        setUser(() => data.user);
+      } catch (err) {
+        console.log(err);
+        setLoading(() => false);
+        setError("Profile Does not exist!");
+      }
+    }
     getProfile();
-  }, [username]);
+  }, [props]);
 
   if (loading) {
     return (
@@ -72,7 +70,7 @@ export default function ProfilePage(props) {
       <Grid.Row centered>
         <Grid.Column style={{ maxWidth: 800 }}>
           <ProfileFeed doctors={doctors} pharmacies={pharmacies} />
-         
+
         </Grid.Column>
       </Grid.Row>
     </Grid>
