@@ -31,31 +31,29 @@ function AddMedForm({ predata }) {
       formData.append(key, state[key])
     }
     try {
-      { predata ? medicationApi.update(state, predata._id) : medicationApi.create(state) }
+      predata ? medicationApi.update(state, predata._id) : medicationApi.create(state);
       navigate("/");
     } catch (err) {
       console.log(err)
     }
   }
 
-  function preLoadFormData() {
-    setState({
-      medName: predata.medName,
-      medGenericName: predata.medGenericName,
-      medDose: predata.medDose,
-      numPerDay: predata.numPerDay,
-      cost: predata.cost,
-      notes: predata.notes,
-      qtyPerFill: predata.qtyPerFill,
-    })
-  }
+
 
   useEffect(() => {
-    if (predata) {
-      preLoadFormData();
+    function preLoadFormData() {
+      setState({
+        medName: predata.medName,
+        medGenericName: predata.medGenericName,
+        medDose: predata.medDose,
+        numPerDay: predata.numPerDay,
+        cost: predata.cost,
+        notes: predata.notes,
+        qtyPerFill: predata.qtyPerFill,
+      })
     }
-
-  }, []);
+      preLoadFormData();
+  }, [predata]);
 
   return (
     <Grid textAlign='center' verticalAlign='middle'>

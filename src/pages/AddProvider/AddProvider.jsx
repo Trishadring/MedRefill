@@ -12,6 +12,7 @@ function AddProvider({ user, type }) {
   if (type === "Doctor") { API = doctorApi }
   if (type === "Pharmacy") { API = pharmacyApi }
   const id = useParams();
+  console.log(id, "id")
   const [state, setState] = useState({
     name: '',
     phoneNum: '',
@@ -34,7 +35,7 @@ function AddProvider({ user, type }) {
       formData.append(key, state[key])
     }
     try {
-      id ? API.update(state, id.id) : API.create(state) 
+      id.length > 1 ? API.update(state, id.id) : API.create(state)
       navigate(`/${user.username}`);
     } catch (err) {
       console.log(err)
@@ -43,33 +44,34 @@ function AddProvider({ user, type }) {
   }
 
 
-  async function getMed() {
-    try {
-      const results = await API.getOne(id.id);
-      let data = results.provider;
-      setLoading(() => false);
-      setState({
-        name: data.name,
-        phoneNum: data.phoneNum,
-        hours: data.hours,
-        notes: data.notes,
-      })
-      setLoading(() => false);
-    } catch (err) {
-      console.log(err.message, "-- this is the error");
-      setLoading(() => false);
-    }
-  }
+
 
 
 
   useEffect(() => {
-    if (id) {
+    async function getMed() {
+      try {
+        const results = await API.getOne(id.id);
+        let data = results.provider;
+        setLoading(() => false);
+        setState({
+          name: data.name,
+          phoneNum: data.phoneNum,
+          hours: data.hours,
+          notes: data.notes,
+        })
+        setLoading(() => false);
+      } catch (err) {
+        console.log(err.message, "-- this is the error");
+        setLoading(() => false);
+      }
+    }
+    if (id.length > 1) {
       getMed();
     } else {
       setLoading(() => false);
     }
-  }, []);
+  }, [id, API]);
 
   if (loading) {
     return (
@@ -89,7 +91,7 @@ function AddProvider({ user, type }) {
       <Grid.Row>
         <Grid.Column style={{ maxWidth: 600 }}>
           <Segment>
-            <Header as='h2'>{id ? "Edit" : "Add"} A {type}</Header>
+            <Header as='h2'>{id.length > 1 ? "Edit" : "Add"} A {type}</Header>
             <Form onSubmit={handleSubmit}>
               <Form.Group widths='equal'>
                 <Form.Input fluid
@@ -112,7 +114,7 @@ function AddProvider({ user, type }) {
                 onChange={handleChange}
                 name='notes'
                 value={state.notes} />
-              <Button type='submit'>{id ? "Update" : "Submit"}</Button>
+              <Button type='submit'>{id.length > 1 ? "Update" : "Submit"}</Button>
             </Form>
           </Segment>
         </Grid.Column>

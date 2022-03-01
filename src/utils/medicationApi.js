@@ -3,12 +3,13 @@ import tokenService from "./tokenService";
 const BASE_URL = '/api/medication';
 
 export function create(medication) {
-  return fetch(`${BASE_URL}`, { // <- this end point is communicating with the create route in /routes/likes.js on express server
+  console.log(medication, "meds")
+  return fetch(BASE_URL, { // <- this end point is communicating with the create route in /routes/likes.js on express server
     method: 'POST',
     body: JSON.stringify(medication),
     headers: {
       'Authorization': 'Bearer ' + tokenService.getToken(),
-      // "Content-Type": "application/json",
+      "Content-Type": "application/json",
       'Accept': 'application/json'
       // <- the jwt contains the user who is sending the like
     }
@@ -86,6 +87,7 @@ export function changePharmacy(oneMed, id) {
 }
 
 export function update(details, oneMed) {
+  console.log(details, oneMed, "detail/id")
   return fetch(`${BASE_URL}/${oneMed}/updateMed`, {
       method: 'PUT',
       body: JSON.stringify(details),
@@ -95,6 +97,8 @@ export function update(details, oneMed) {
         'Accept': 'application/json'
       }
     })
-    .then(res => res.json());
+    .then(res => res.json())
+    .catch(err => {
+      console.log(err, "error on update")
+    })
 }
-

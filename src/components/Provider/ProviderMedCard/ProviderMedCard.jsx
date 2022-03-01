@@ -3,8 +3,9 @@ import { Card } from "semantic-ui-react";
 import ProviderDetails from '../../Provider/ProviderDetails/ProviderDetails';
 import LinkProvider from '../LinkProvider/LinkProvider'
 
-function ProviderMedCard({ med_id, provider, providers, type }) {
+function ProviderMedCard({ med_id, providers, provider, type }) {
   const [options, setOptions] = useState([]);
+  console.log(providers, "providers")
 
   function getNames(providers) {
     try {

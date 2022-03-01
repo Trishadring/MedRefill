@@ -20,16 +20,20 @@ function addDays(pills, numPerDay, result) {
 }
 
 async function create(req, res) {
+  console.log(req.user, "user");
+  console.log(req.body, "body")
   const med = req.body;
   const today = new Date();
-  const refillDate = addDays(med.numPillsLeft, numPerDay, today);
+
+  console.log(med.numPillsLeft, med.numPerDay, today, "dets")
+  const refillDate = addDays(med.numPillsLeft, med.numPerDay, today);
+  console.log(refillDate, "refillDate")
   try {
     const medication = await Medication.create({
       medName: med.medName,
-      medDose: med.dosage,
-      medGenericName: med.genericName,
-      numPerDay: parseInt(med.perDay),
-      cost: parseInt(med.cost),
+      medDose: med.medDose,
+      medGenericName: med.medGenericName,
+      numPerDay: parseInt(med.numPerDay),
       refillDate: new Date(refillDate),
       qtyPerFill: parseInt(med.qtyPerFill),
       notes: med.notes,
@@ -39,6 +43,7 @@ async function create(req, res) {
       medication
     })
   } catch (e) {
+    console.log(e);
     res.status(400).json({
       e
     })

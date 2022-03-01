@@ -20,7 +20,7 @@ function ProfileBio({ user }) {
             <h3>{user.username}</h3>
           </Segment>
           <Segment>
-            <span> Bio: {user.email}</span>
+            <span> Email: {user.email}</span>
           </Segment>
         </Grid.Column>
       </Grid.Row>

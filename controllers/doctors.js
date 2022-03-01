@@ -77,7 +77,7 @@ async function update(req, res) {
       doctor
     });
 
-  } catch {
+  } catch (err) {
     res.status(400).json({
       err
     })
