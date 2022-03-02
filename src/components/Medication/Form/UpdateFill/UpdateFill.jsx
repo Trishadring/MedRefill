@@ -3,7 +3,7 @@ import { Form, Button } from "semantic-ui-react";
 import * as medicationApi from "../../../../utils/medicationApi";
 
 
-function UpdateFill({ med_id, medication }) {
+function UpdateFill({ med_id, setReRender }) {
   const [state, setState] = useState({
     lastFilled: '',
   })
@@ -17,22 +17,10 @@ function UpdateFill({ med_id, medication }) {
     e.preventDefault()
     try {
       medicationApi.updateFill(state, med_id)
-      updateRefill()
+      setReRender();
     } catch (err) {
       console.log(err)
     }
-  }
-  function updateRefill() {
-    function addDays(pills, numPerDay, result) {
-      let PerDay = parseInt(numPerDay);
-      let daysOfPills = pills / PerDay;
-      let results = result.setDate(result.getDate() + daysOfPills);
-      return results;
-    }
-    const dates = new Date(state.lastFilled);
-    const refillDate = addDays(medication.qtyPerFill, medication.numPerDay, dates);
-    medication.refillDate = new Date(refillDate)
-    console.log(refillDate);
   }
 
   return (
@@ -43,7 +31,6 @@ function UpdateFill({ med_id, medication }) {
           name='lastFilled'
           value={state.lastFilled} />
         <Button content='Add Fill' icon='edit outline' labelPosition='right' />
-        {/* ice box add ablity to update meds left */}
       </Form.Group>
     </Form>
   )

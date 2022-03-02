@@ -5,8 +5,10 @@ import MedFeed from '../../components/Medication/MedFeed/MedFeed'
 import * as medicationApi from "../../utils/medicationApi";
 import { Grid } from "semantic-ui-react";
 import Loading from "../../components/Loader/Loader";
+import useToggle from '../../utils/useToggle'
 
 export default function Feed({ user, handleLogout }) {
+  const [reRender, setReRender] = useToggle();
   const [meds, setMeds] = useState([]);
   const [loading, setLoading] = useState(true);
   async function getMeds() {
@@ -21,7 +23,7 @@ export default function Feed({ user, handleLogout }) {
 
   useEffect(() => {
     getMeds();
-  }, []);
+  }, [reRender]);
   if (loading) {
     return (
       <>
@@ -40,12 +42,12 @@ export default function Feed({ user, handleLogout }) {
       </Grid.Row>
       <Grid.Row>
         <Grid.Column style={{ maxWidth: 800 }}>
-        <MedFeed medication={meds} user={user} loading={loading} />
+          <MedFeed medication={meds} user={user} loading={loading} />
         </Grid.Column>
       </Grid.Row>
       <Grid.Row>
         <Grid.Column style={{ maxWidth: 450 }}>
-          <AddMedForm />
+          <AddMedForm setReRender={setReRender} />
         </Grid.Column>
       </Grid.Row>
     </Grid>

@@ -7,10 +7,12 @@ import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 import ProfileBio from '../../components/ProfileBio/ProfileBio'
 import ProfileFeed from '../../components/Provider/ProviderFeed/ProviderFeed'
 import { useParams } from "react-router-dom";
+import useToggle from '../../utils/useToggle'
 
 export default function ProfilePage(props) {
   const [doctors, setDoctors] = useState([]);
   const [pharmacies, setPharmacies] = useState([]);
+  const [reRender, setReRender] = useToggle();
   const [user, setUser] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -35,7 +37,7 @@ export default function ProfilePage(props) {
       }
     }
     getProfile();
-  }, [props]);
+  }, [props, reRender]);
 
   if (loading) {
     return (
@@ -69,7 +71,7 @@ export default function ProfilePage(props) {
       </Grid.Row>
       <Grid.Row centered>
         <Grid.Column style={{ maxWidth: 800 }}>
-          <ProfileFeed doctors={doctors} pharmacies={pharmacies} />
+          <ProfileFeed doctors={doctors} pharmacies={pharmacies} setReRender={setReRender} />
 
         </Grid.Column>
       </Grid.Row>

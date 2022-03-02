@@ -6,10 +6,11 @@ import * as medicationApi from "../../utils/medicationApi";
 import userService from "../../utils/userService";
 import { Grid } from "semantic-ui-react";
 import Loading from "../../components/Loader/Loader";
+import useToggle from '../../utils/useToggle'
 
 export default function Medication({ user }) {
   const [meds, setMeds] = useState([]);
-  const [provider, setProvider] = useState([]);
+  const [reRender, setReRender] = useToggle();
   const [Providers, setProviders] = useState([]);
   const [loading, setLoading] = useState(true);
   const id = useParams();
@@ -29,10 +30,6 @@ export default function Medication({ user }) {
         doctors: data.doctors,
         pharmacies: data.pharmacies
       })
-      setProvider({
-        doctor: meds.doctor,
-        pharmacy: meds.pharmacy
-      })
       setLoading(() => false);
     } catch (err) {
       console.log(err);
@@ -42,11 +39,8 @@ export default function Medication({ user }) {
 
   useEffect(() => {
     getMed();
-    console.log(meds, "meds")
-
-    console.log(provider, "provider")
     getProfile();
-  }, []);
+  }, [reRender]);
 
   if (loading) {
     return (
@@ -66,7 +60,7 @@ export default function Medication({ user }) {
       </Grid.Row>
       <Grid.Row>
         <Grid.Column style={{ maxWidth: 900 }}>
-          <FullMedCard medication={meds} provider={provider} providers={Providers} />
+          <FullMedCard medication={meds} setReRender={setReRender} providers={Providers} />
         </Grid.Column>
       </Grid.Row>
     </Grid>

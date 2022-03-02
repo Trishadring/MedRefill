@@ -2,7 +2,7 @@ import React from "react";
 import { Card, Button, Segment } from "semantic-ui-react"; import { Link } from "react-router-dom";
 import ProviderDetails from '../ProviderDetails/ProviderDetails'
 
-function ProviderCard({ providers, type }) {
+function ProviderCard({ providers, type, setReRender }) {
   return (
     <Card fluid>
       <Card.Content>
@@ -10,7 +10,7 @@ function ProviderCard({ providers, type }) {
         <Segment.Group>
           {providers.map((provider) => {
             return (
-              <ProviderDetails key={provider._id} type={type} doctor={provider} providers={providers} />
+              <ProviderDetails key={provider._id} type={type} doctor={provider} providers={providers} setReRender={setReRender} />
             );
           })}
         </Segment.Group>

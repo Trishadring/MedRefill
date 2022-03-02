@@ -5,7 +5,7 @@ import * as medicationApi from "../../../../utils/medicationApi";
 
 
 
-function AddMedForm({ preData }) {
+function AddMedForm({ preData, setReRender }) {
   const navigate = useNavigate();
   const [edit, setEdit] = useState(false);
   const [state, setState] = useState({
@@ -36,7 +36,7 @@ function AddMedForm({ preData }) {
     try {
       edit ? medicationApi.update(state, preData._id) : medicationApi.create(state);
       edit ? navigate(`/medication/${preData._id}`) : navigate(`/`);
-
+      setReRender();
     } catch (err) {
       console.log(err)
     }

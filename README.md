@@ -16,7 +16,7 @@
 Built with  
 -Express  
 -MongoDB  
--semantic ui react
+-semantic ui react  
 -React  
 -Javascript  
 -Node.js  
@@ -24,7 +24,7 @@ Built with
 
 ## Getting Started
 
-[deployed app ](https://medicationrefill.herokuapp.com/)
+[deployed app ](https://medicationrefill.herokuapp.com/)  
 [Trello Docs](https://trello.com/b/tpW5AMRV/medication)
 
 

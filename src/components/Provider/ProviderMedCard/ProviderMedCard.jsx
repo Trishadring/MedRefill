@@ -3,7 +3,7 @@ import { Card } from "semantic-ui-react";
 import ProviderDetails from '../../Provider/ProviderDetails/ProviderDetails';
 import LinkProvider from '../LinkProvider/LinkProvider'
 
-function ProviderMedCard({ med_id, providers, provider, type }) {
+function ProviderMedCard({ med_id, providers, provider, type, setReRender }) {
   const [options, setOptions] = useState([]);
 
   function getNames(providers) {
@@ -33,9 +33,9 @@ function ProviderMedCard({ med_id, providers, provider, type }) {
         <Card.Header>{type}</Card.Header>
         <Card.Meta>
         </Card.Meta>
-        {provider ? <ProviderDetails doctor={provider} type={type} /> : "No provider Yet"}
+        {provider ? <ProviderDetails setReRender={setReRender} doctor={provider} type={type} /> : "No provider Yet"}
         <Card.Content>
-          <LinkProvider options={options} provider={provider} med_id={med_id} type={type} />
+          <LinkProvider options={options} setReRender={setReRender} provider={provider} med_id={med_id} type={type} />
         </Card.Content>
 
         <Card.Content extra>

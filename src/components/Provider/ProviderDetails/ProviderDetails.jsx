@@ -5,7 +5,7 @@ import "./ProviderDetails.css"
 import * as doctorApi from "../../../utils/doctorApi";
 import * as pharmacyApi from "../../../utils/pharmacyApi";
 
-function ProviderDetails({ doctor, type, providers }) {
+function ProviderDetails({ doctor, type, providers, setReRender }) {
   let API = "";
   if (type === "Doctor") { API = doctorApi }
   if (type === "Pharmacy") { API = pharmacyApi }
@@ -22,7 +22,7 @@ function ProviderDetails({ doctor, type, providers }) {
       API.deleteProvider(doctor._id)
       doctor = "";
       console.log(doctor, "doctor");
-
+      setReRender();
     } catch (err) {
       console.log(err.message, " this is the error");
     }
