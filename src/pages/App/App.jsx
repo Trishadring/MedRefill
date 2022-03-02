@@ -9,12 +9,13 @@ import AddProvider from '../AddProvider/AddProvider'
 import Medication from '../Medication/Medication'
 import MedicationUpdate from '../MedicationUpdate/MedicationUpdate'
 import ProfilePage from '../ProfilePage/ProfilePage'
+import { useNavigate } from "react-router-dom";
 
 
 
 function App() {
   const [user, setUser] = useState(userService.getUser());
-
+  const navigate = useNavigate();
   function handleSignUpOrLogin() {
     setUser(userService.getUser());
   }
@@ -29,13 +30,13 @@ function App() {
       <Routes>
         <Route path="/" element={<Feed user={user} handleLogout={handleLogout} />} />
         <Route path="/:username" element={<ProfilePage user={user} handleLogout={handleLogout} />} />
-        <Route path="/Doctor" element={< AddProvider user={user} type="Doctor" />} />
-        <Route path="/Doctor/edit/:id" element={< AddProvider user={user} type="Doctor" role="edit" />} />
-        <Route path="/Pharmacy" element={< AddProvider user={user} type="Pharmacy" />} />
-        <Route path="/Pharmacy/edit/:id" element={< AddProvider user={user} type="Pharmacy" role="edit"  />} />
-        <Route path="/medication/:medId" element={< Medication user={user} />} />
-        <Route path="/medication/:medId/edit" element={< MedicationUpdate user={user} />} />
-        <Route path="/logout" handleLogout={handleLogout} />
+        <Route path="/Doctor" element={< AddProvider user={user} handleLogout={handleLogout} type="Doctor" />} />
+        <Route path="/Doctor/edit/:id" element={< AddProvider user={user} handleLogout={handleLogout} type="Doctor" />} />
+        <Route path="/Pharmacy" element={< AddProvider user={user} handleLogout={handleLogout} type="Pharmacy" />} />
+        <Route path="/Pharmacy/edit/:id" element={< AddProvider user={user} handleLogout={handleLogout} type="Pharmacy" />} />
+        <Route path="/medication/:medId" element={< Medication user={user} handleLogout={handleLogout} />} />
+        <Route path="/medication/:medId/edit" element={< MedicationUpdate user={user} handleLogout={handleLogout} />} />
+        <Route path="/logout" element={<LoginPage handleSignUpOrLogin={handleSignUpOrLogin} />} />
       </Routes>
     );
   }

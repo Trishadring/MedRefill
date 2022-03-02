@@ -5,7 +5,7 @@ import MedFeed from '../../components/Medication/MedFeed/MedFeed'
 import * as medicationApi from "../../utils/medicationApi";
 import { Grid } from "semantic-ui-react";
 import Loading from "../../components/Loader/Loader";
-import useToggle from '../../utils/useToggle'
+import useToggle from '../../Hooks/useToggle'
 
 export default function Feed({ user, handleLogout }) {
   const [reRender, setReRender] = useToggle();

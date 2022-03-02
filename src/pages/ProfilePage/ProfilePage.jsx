@@ -7,7 +7,7 @@ import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 import ProfileBio from '../../components/ProfileBio/ProfileBio'
 import ProfileFeed from '../../components/Provider/ProviderFeed/ProviderFeed'
 import { useParams } from "react-router-dom";
-import useToggle from '../../utils/useToggle'
+import useToggle from '../../Hooks/useToggle'
 
 export default function ProfilePage(props) {
   const [doctors, setDoctors] = useState([]);

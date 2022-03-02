@@ -6,7 +6,7 @@ import Loading from "../../components/Loader/Loader";
 import * as medicationApi from "../../utils/medicationApi";
 import { Grid } from "semantic-ui-react";
 
-export default function MedicationUpdate({ user }) {
+export default function MedicationUpdate({ user, handleLogout }) {
   const [meds, setMeds] = useState([]);
   const [loading, setLoading] = useState(true);
   const id = useParams();
@@ -29,7 +29,7 @@ export default function MedicationUpdate({ user }) {
   if (loading) {
     return (
       <>
-        <Nav user={user} />
+         <Nav user={user} handleLogout={handleLogout} />
         <Loading />
       </>
     );
@@ -39,7 +39,7 @@ export default function MedicationUpdate({ user }) {
     <Grid centered>
       <Grid.Row>
         <Grid.Column>
-          <Nav user={user} />
+           <Nav user={user} handleLogout={handleLogout} />
         </Grid.Column>
       </Grid.Row>
       <Grid.Row>

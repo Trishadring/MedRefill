@@ -7,7 +7,7 @@ import Nav from '../../components/Nav/Nav'
 import { useNavigate } from "react-router-dom";
 import Loading from "../../components/Loader/Loader";
 
-function AddProvider({ user, type }) {
+function AddProvider({ user, type, handleLogout }) {
   let API = "";
   if (type === "Doctor") { API = doctorApi }
   if (type === "Pharmacy") { API = pharmacyApi }
@@ -76,7 +76,7 @@ function AddProvider({ user, type }) {
   if (loading) {
     return (
       <>
-        <Nav user={user} />
+        <Nav user={user} handleLogout={handleLogout} />
         <Loading />
       </>
     );
@@ -85,7 +85,7 @@ function AddProvider({ user, type }) {
     <Grid centered>
       <Grid.Row>
         <Grid.Column>
-          <Nav user={user} />
+          <Nav user={user} handleLogout={handleLogout} />
         </Grid.Column>
       </Grid.Row>
       <Grid.Row>

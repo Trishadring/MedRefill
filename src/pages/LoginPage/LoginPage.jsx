@@ -41,8 +41,8 @@ export default function LoginPage(props) {
           </Header>
           <Form autoComplete="off" onSubmit={handleSubmit}>
             <Segment stacked>
-              <Form.Input type="email" name="email" placeholder="email" value={state.email} onChange={handleChange} required />
-              <Form.Input name="password" type="password" placeholder="password" value={state.password} onChange={handleChange} required />
+              <Form.Input label='Username' type="email" name="email" placeholder="email" value={state.email} onChange={handleChange} required />
+              <Form.Input label='Password' name="password" type="password" placeholder="password" value={state.password} onChange={handleChange} required />
               <Button color='teal' fluid size='large' type="submit" className="btn" disabled={invalidForm} >
                 Login
               </Button>

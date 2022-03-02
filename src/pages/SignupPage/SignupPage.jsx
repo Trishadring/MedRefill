@@ -3,7 +3,7 @@ import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 import { Button, Form, Grid, Header, Segment } from "semantic-ui-react";
 
 import userService from "../../utils/userService";
-import { useNavigate, Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export default function SignUpPage(props) {
   const [error, setError] = useState('')
@@ -71,6 +71,7 @@ export default function SignUpPage(props) {
         <Form autoComplete="off" onSubmit={handleSubmit}>
           <Segment stacked>
             <Form.Input
+            label='Username'
               name="username"
               placeholder="username"
               value={state.username}
@@ -78,6 +79,7 @@ export default function SignUpPage(props) {
               required
             />
             <Form.Input
+              label='Email'
               type="email"
               name="email"
               placeholder="email"
@@ -86,6 +88,7 @@ export default function SignUpPage(props) {
               required
             />
             <Form.Input
+              label='Password'
               name="password"
               type="password"
               placeholder="password"
@@ -94,6 +97,7 @@ export default function SignUpPage(props) {
               required
             />
             <Form.Input
+            label='Confirm Password'
               name="passwordConf"
               type="password"
               placeholder="Confirm Password"
@@ -103,6 +107,7 @@ export default function SignUpPage(props) {
             />
             <Form.Field>
               <Form.Input required
+                label='Profile Photo'
                 type="file"
                 name="photo"
                 placeholder="upload image"

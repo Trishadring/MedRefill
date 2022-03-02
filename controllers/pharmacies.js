@@ -33,7 +33,6 @@ async function create(req, res) {
 async function getAll(req, res) {
 
   try {
-
     const pharmacy = await Pharmacy.find({
       user: req.user._id
     });

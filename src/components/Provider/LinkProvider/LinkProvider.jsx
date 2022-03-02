@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Form, Button, Select } from "semantic-ui-react";
 import * as medicationApi from "../../../utils/medicationApi";
-import useToggle from '../../../utils/useToggle'
 
 function LinkProvider({ options, med_id, type, setReRender }) {
   const [state, setState] = useState();
