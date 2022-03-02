@@ -5,20 +5,24 @@ import "./ProviderDetails.css"
 import * as doctorApi from "../../../utils/doctorApi";
 import * as pharmacyApi from "../../../utils/pharmacyApi";
 
-function ProviderDetails({ doctor, type }) {
+function ProviderDetails({ doctor, type, providers }) {
   let API = "";
   if (type === "Doctor") { API = doctorApi }
   if (type === "Pharmacy") { API = pharmacyApi }
+  console.log(providers, "providers");
   const navigate = useNavigate();
   function edit(e) {
     e.preventDefault()
     navigate(`/${type}/edit/${doctor._id}`);
-
   }
+
   function deleteProvider(e) {
     e.preventDefault()
     try {
       API.deleteProvider(doctor._id)
+      doctor = "";
+      console.log(doctor, "doctor");
+
     } catch (err) {
       console.log(err.message, " this is the error");
     }

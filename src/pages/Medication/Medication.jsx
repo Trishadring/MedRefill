@@ -9,14 +9,18 @@ import Loading from "../../components/Loader/Loader";
 
 export default function Medication({ user }) {
   const [meds, setMeds] = useState([]);
+  const [provider, setProvider] = useState([]);
   const [Providers, setProviders] = useState([]);
   const [loading, setLoading] = useState(true);
   const id = useParams();
-
   async function getMed() {
     try {
       const data = await medicationApi.getOne(id.medId);
       setMeds(data.medication);
+      setProvider({
+        doctor: data.doctor,
+        pharmacy: data.pharmacy
+      })
     } catch (err) {
       console.log(err.message, "-- this is the error");
     }
@@ -58,7 +62,7 @@ export default function Medication({ user }) {
       </Grid.Row>
       <Grid.Row>
         <Grid.Column style={{ maxWidth: 900 }}>
-          <FullMedCard medication={meds} providers={Providers} />
+          <FullMedCard medication={meds} provider={provider} providers={Providers} />
         </Grid.Column>
       </Grid.Row>
     </Grid>

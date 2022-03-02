@@ -30,8 +30,6 @@ function MedCard({ medication }) {
   useEffect(() => {
     if (id.medId) {
       setOnMedPage(() => true);
-      console.log(onMedPage, "has id")
-      console.log(medication)
     }
   }, [medication]);
 

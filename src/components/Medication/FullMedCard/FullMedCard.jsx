@@ -5,7 +5,7 @@ import UpdateFill from "../Form/UpdateFill/UpdateFill"
 import MedCard from '../MedCard/MedCard'
 import ProviderMedCard from '../../Provider/ProviderMedCard/ProviderMedCard'
 
-function FullMedCard({ medication, providers }) {
+function FullMedCard({ medication, providers, provider }) {
 
   return (
     <Card.Group itemsPerRow={2}>
@@ -14,15 +14,15 @@ function FullMedCard({ medication, providers }) {
         <Card.Content>
           <Card.Header>Med Status</Card.Header>
           <Card.Content>
-            <UpdateFill med_id={medication._id} />
+            <UpdateFill med_id={medication._id} medication={medication} />
           </Card.Content>
           <Link to={`/medication/${medication._id}/edit`}>
             <Button type='submit'>Edit meds</Button>
           </Link>
         </Card.Content>
       </Card>
-      <ProviderMedCard type="Doctor" med_id={medication._id} provider={medication.doctor} providers={providers.doctors} />
-      <ProviderMedCard type="Pharmacy" med_id={medication._id} provider={medication.pharmacy} providers={providers.pharmacies} />
+      <ProviderMedCard type="Doctor" med_id={medication._id} provider={provider.doctor} providers={providers.doctors} />
+      <ProviderMedCard type="Pharmacy" med_id={medication._id} provider={provider.pharmacy} providers={providers.pharmacies} />
 
 
     </Card.Group>

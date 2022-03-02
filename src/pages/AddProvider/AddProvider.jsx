@@ -35,12 +35,11 @@ function AddProvider({ user, type }) {
       formData.append(key, state[key])
     }
     try {
-      id.length > 1 ? API.update(state, id.id) : API.create(state)
+      id.id ? API.update(state, id.id) : API.create(state)
       navigate(`/${user.username}`);
     } catch (err) {
       console.log(err)
     }
-
   }
 
 
@@ -53,6 +52,7 @@ function AddProvider({ user, type }) {
       try {
         const results = await API.getOne(id.id);
         let data = results.provider;
+        console.log(results, "data")
         setLoading(() => false);
         setState({
           name: data.name,
@@ -66,12 +66,12 @@ function AddProvider({ user, type }) {
         setLoading(() => false);
       }
     }
-    if (id.length > 1) {
+    if (id.id) {
       getMed();
     } else {
       setLoading(() => false);
     }
-  }, [id, API]);
+  }, []);
 
   if (loading) {
     return (
@@ -91,7 +91,7 @@ function AddProvider({ user, type }) {
       <Grid.Row>
         <Grid.Column style={{ maxWidth: 600 }}>
           <Segment>
-            <Header as='h2'>{id.length > 1 ? "Edit" : "Add"} A {type}</Header>
+            <Header as='h2'>{id.id ? "Edit" : "Add"} A {type}</Header>
             <Form onSubmit={handleSubmit}>
               <Form.Group widths='equal'>
                 <Form.Input fluid
@@ -114,7 +114,7 @@ function AddProvider({ user, type }) {
                 onChange={handleChange}
                 name='notes'
                 value={state.notes} />
-              <Button type='submit'>{id.length > 1 ? "Update" : "Submit"}</Button>
+              <Button type='submit'>{id.id ? "Update" : "Submit"}</Button>
             </Form>
           </Segment>
         </Grid.Column>

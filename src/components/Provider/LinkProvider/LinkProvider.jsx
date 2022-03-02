@@ -3,14 +3,17 @@ import { Form, Button, Select } from "semantic-ui-react";
 import * as medicationApi from "../../../utils/medicationApi";
 
 
-function LinkProvider({ options, med_id, type }) {
+function LinkProvider({ options, med_id, type, provider }) {
   const [state, setState] = useState();
+  // console.log(provider, "pro")
   function handleChange(e, data) {
     setState(data.value);
   }
+
   function handleSubmit(e) {
     e.preventDefault()
     try {
+      provider = state.key;
       if (type === "Doctor") { medicationApi.changeDoc(med_id, state) }
       if (type === "Pharmacy") { medicationApi.changePharmacy(med_id, state) }
     } catch (err) {

@@ -38,14 +38,14 @@ export default function SignUpPage(props) {
     formData.append('photo', selectedFile)
 
     for (let fieldName in state) {
-      console.log(fieldName, state[fieldName])
+      // console.log(fieldName, state[fieldName])
       // append the rest of the data to the form object
       formData.append(fieldName, state[fieldName])
     }
 
     try {
       // If you want to view the formData you need to loop over the object
-      console.log(formData.forEach((item) => console.log(item)))
+      // console.log(formData.forEach((item) => console.log(item)))
 
       // use the userService to make the fetch request
       await userService.signup(formData);

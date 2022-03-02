@@ -3,7 +3,7 @@ import { Form, Button } from "semantic-ui-react";
 import * as medicationApi from "../../../../utils/medicationApi";
 
 
-function UpdateFill({ med_id }) {
+function UpdateFill({ med_id, medication }) {
   const [state, setState] = useState({
     lastFilled: '',
   })
@@ -17,10 +17,24 @@ function UpdateFill({ med_id }) {
     e.preventDefault()
     try {
       medicationApi.updateFill(state, med_id)
+      updateRefill()
     } catch (err) {
       console.log(err)
     }
   }
+  function updateRefill() {
+    function addDays(pills, numPerDay, result) {
+      let PerDay = parseInt(numPerDay);
+      let daysOfPills = pills / PerDay;
+      let results = result.setDate(result.getDate() + daysOfPills);
+      return results;
+    }
+    const dates = new Date(state.lastFilled);
+    const refillDate = addDays(medication.qtyPerFill, medication.numPerDay, dates);
+    medication.refillDate = new Date(refillDate)
+    console.log(refillDate);
+  }
+
   return (
     <Form onSubmit={handleSubmit}>
       <p>Add A Medication Refill</p>

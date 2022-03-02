@@ -33,7 +33,7 @@ function ProviderMedCard({ med_id, providers, provider, type }) {
         </Card.Meta>
         {provider ? <ProviderDetails doctor={provider} type={type} /> : "No provider Yet"}
         <Card.Content>
-          <LinkProvider options={options} med_id={med_id} type={type} />
+          <LinkProvider options={options} provider={provider} med_id={med_id} type={type} />
         </Card.Content>
 
         <Card.Content extra>
