@@ -17,10 +17,7 @@ export default function Medication({ user }) {
     try {
       const data = await medicationApi.getOne(id.medId);
       setMeds(data.medication);
-      setProvider({
-        doctor: data.doctor,
-        pharmacy: data.pharmacy
-      })
+
     } catch (err) {
       console.log(err.message, "-- this is the error");
     }
@@ -32,6 +29,10 @@ export default function Medication({ user }) {
         doctors: data.doctors,
         pharmacies: data.pharmacies
       })
+      setProvider({
+        doctor: meds.doctor,
+        pharmacy: meds.pharmacy
+      })
       setLoading(() => false);
     } catch (err) {
       console.log(err);
@@ -41,6 +42,9 @@ export default function Medication({ user }) {
 
   useEffect(() => {
     getMed();
+    console.log(meds, "meds")
+
+    console.log(provider, "provider")
     getProfile();
   }, []);
 

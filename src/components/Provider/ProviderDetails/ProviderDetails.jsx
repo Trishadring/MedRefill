@@ -9,9 +9,9 @@ function ProviderDetails({ doctor, type, providers }) {
   let API = "";
   if (type === "Doctor") { API = doctorApi }
   if (type === "Pharmacy") { API = pharmacyApi }
-  console.log(providers, "providers");
   const navigate = useNavigate();
   function edit(e) {
+    console.log(providers, "providers")
     e.preventDefault()
     navigate(`/${type}/edit/${doctor._id}`);
   }

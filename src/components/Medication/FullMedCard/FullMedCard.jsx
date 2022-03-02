@@ -21,8 +21,8 @@ function FullMedCard({ medication, providers, provider }) {
           </Link>
         </Card.Content>
       </Card>
-      <ProviderMedCard type="Doctor" med_id={medication._id} provider={provider.doctor} providers={providers.doctors} />
-      <ProviderMedCard type="Pharmacy" med_id={medication._id} provider={provider.pharmacy} providers={providers.pharmacies} />
+      <ProviderMedCard type="Doctor" med_id={medication._id} provider={medication.doctor} providers={providers.doctors} />
+      <ProviderMedCard type="Pharmacy" med_id={medication._id} provider={medication.pharmacy} providers={providers.pharmacies} />
 
 
     </Card.Group>

@@ -35,7 +35,8 @@ function AddMedForm({ preData }) {
     }
     try {
       edit ? medicationApi.update(state, preData._id) : medicationApi.create(state);
-      navigate(`/medication/${preData._id}`);
+      edit ? navigate(`/medication/${preData._id}`) : navigate(`/`);
+
     } catch (err) {
       console.log(err)
     }
