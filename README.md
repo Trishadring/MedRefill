@@ -4,10 +4,10 @@ The worst thing about taking medication daily is remembering when you have to fi
 
 ## ScreenShots
 
-![Before you are logged in](https://imgur.com/n6C6m8T)
-![home page](https://imgur.com/Jknn60J)
-![medication detail page](https://imgur.com/SoBIPbA)
-![user profile page](https://imgur.com/8e8O3O8)
+![Before you are logged in](https://imgur.com/n6C6m8T.png)
+![home page](https://imgur.com/Jknn60J.png)
+![medication detail page](https://imgur.com/SoBIPbA.png)
+![user profile page](https://imgur.com/8e8O3O8.png)
 
 ## Technologies Used
 
@@ -24,7 +24,7 @@ Built with
 
 To get started sign up then start adding your medications. To add a doctor or pharmacy click on your profile photo at the top of the page.
 
-[deployed app ](https://medicationrefill.herokuapp.com/)  
+[Deployed app ](https://medicationrefill.herokuapp.com/)  
 [Trello Docs](https://trello.com/b/tpW5AMRV/medication)
 
 
