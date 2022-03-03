@@ -15,7 +15,6 @@ export default function MedicationUpdate({ user, handleLogout }) {
     try {
       const data = await medicationApi.getOne(id.medId);
       setMeds(data.medication);
-      console.log(meds);
       setLoading(() => false);
     } catch (err) {
       console.log(err.message, "-- this is the error");
@@ -29,25 +28,16 @@ export default function MedicationUpdate({ user, handleLogout }) {
   if (loading) {
     return (
       <>
-         <Nav user={user} handleLogout={handleLogout} />
         <Loading />
       </>
     );
   }
   return (
-
-    <Grid centered>
-      <Grid.Row>
-        <Grid.Column>
-           <Nav user={user} handleLogout={handleLogout} />
-        </Grid.Column>
-      </Grid.Row>
-      <Grid.Row>
-        <Grid.Column style={{ maxWidth: 450 }}>
-          <AddMedForm preData={meds} />
-        </Grid.Column>
-      </Grid.Row>
-    </Grid>
+    <Grid.Row>
+      <Grid.Column style={{ maxWidth: 450 }}>
+        <AddMedForm preData={meds} />
+      </Grid.Column>
+    </Grid.Row>
   )
 
 }

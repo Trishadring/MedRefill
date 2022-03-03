@@ -11,7 +11,6 @@ function ProviderDetails({ doctor, type, providers, setReRender }) {
   if (type === "Pharmacy") { API = pharmacyApi }
   const navigate = useNavigate();
   function edit(e) {
-    console.log(providers, "providers")
     e.preventDefault()
     navigate(`/${type}/edit/${doctor._id}`);
   }
@@ -20,8 +19,6 @@ function ProviderDetails({ doctor, type, providers, setReRender }) {
     e.preventDefault()
     try {
       API.deleteProvider(doctor._id)
-      doctor = "";
-      console.log(doctor, "doctor");
       setReRender();
     } catch (err) {
       console.log(err.message, " this is the error");

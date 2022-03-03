@@ -17,7 +17,6 @@ module.exports = {
 };
 
 function signup(req, res) {
-  console.log(req.body, "req.bogy")
   // FilePath unique name to be saved to our bucket
   const filePath = `${uuidv4()}/${req.file.originalname}`
   const params = {
@@ -28,7 +27,6 @@ function signup(req, res) {
   //your bucket name goes where collector cat is 
   //////////////////////////////////////////////////////////////////////////////////
   s3.upload(params, async function (err, data) {
-    console.log(data, "data")
     const user = new User({
       ...req.body,
       photoUrl: data.Location

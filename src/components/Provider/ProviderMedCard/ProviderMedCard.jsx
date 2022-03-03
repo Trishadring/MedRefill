@@ -8,7 +8,6 @@ function ProviderMedCard({ med_id, providers, provider, type, setReRender }) {
 
   function getNames(providers) {
     setOptions([]);
-    console.log(providers, "providers")
     try {
       providers.forEach((p) => {
         setOptions(prevItems => [...prevItems, {
@@ -24,7 +23,6 @@ function ProviderMedCard({ med_id, providers, provider, type, setReRender }) {
   }
   useEffect(() => {
     getNames(providers);
-    console.log(provider, med_id, "yea")
   }, [providers]);
 
   return (

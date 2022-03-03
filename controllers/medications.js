@@ -20,8 +20,6 @@ function addDays(pills, numPerDay, result) {
 }
 
 async function create(req, res) {
-  console.log(req.user, "user");
-  console.log(req.body, "body")
   const med = req.body;
   const today = new Date();
 
@@ -74,7 +72,6 @@ async function getOne(req, res) {
       medication
     });
   } catch (err) {
-    console.log(err, "get one controller");
     res.status(400).json({
       err
     })
@@ -155,7 +152,6 @@ async function updatePharmacy(req, res) {
       medication
     });
   } catch (err) {
-    console.log(err, "updatePharmacy controller");
     res.status(400).json({
       err
     })

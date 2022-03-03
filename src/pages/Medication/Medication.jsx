@@ -8,7 +8,7 @@ import { Grid } from "semantic-ui-react";
 import Loading from "../../components/Loader/Loader";
 import useToggle from '../../Hooks/useToggle'
 
-export default function Medication({ user, handleLogout  }) {
+export default function Medication({ user, handleLogout }) {
   const [meds, setMeds] = useState([]);
   const [reRender, setReRender] = useToggle();
   const [Providers, setProviders] = useState([]);
@@ -45,25 +45,19 @@ export default function Medication({ user, handleLogout  }) {
   if (loading) {
     return (
       <>
-        <Nav user={user} handleLogout={handleLogout} />
         <Loading />
       </>
     );
   }
   return (
 
-    <Grid centered>
-      <Grid.Row>
-        <Grid.Column>
-          <Nav user={user} handleLogout={handleLogout} />
-        </Grid.Column>
-      </Grid.Row>
+    <>
       <Grid.Row>
         <Grid.Column style={{ maxWidth: 900 }}>
           <FullMedCard medication={meds} setReRender={setReRender} providers={Providers} />
         </Grid.Column>
       </Grid.Row>
-    </Grid>
+    </>
   )
 
 }

@@ -3,7 +3,6 @@ import tokenService from "./tokenService";
 const BASE_URL = '/api/medication';
 
 export function create(medication) {
-  console.log(medication, "meds")
   return fetch(BASE_URL, { // <- this end point is communicating with the create route in /routes/likes.js on express server
     method: 'POST',
     body: JSON.stringify(medication),

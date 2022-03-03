@@ -56,7 +56,6 @@ async function getOne(req, res) {
       provider: doctor
     });
   } catch (err) {
-    console.log(err, "get one controller");
     res.status(400).json({
       err
     })
@@ -91,7 +90,6 @@ async function deleteProvider(req, res) {
     });
     res.status(200).json({});
   } catch (err) {
-    console.log(err, "get one controller");
     res.status(400).json({
       err
     })

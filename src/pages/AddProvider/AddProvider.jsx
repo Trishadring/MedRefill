@@ -12,7 +12,6 @@ function AddProvider({ user, type, handleLogout }) {
   if (type === "Doctor") { API = doctorApi }
   if (type === "Pharmacy") { API = pharmacyApi }
   const id = useParams();
-  console.log(id, "id")
   const [state, setState] = useState({
     name: '',
     phoneNum: '',
@@ -52,7 +51,6 @@ function AddProvider({ user, type, handleLogout }) {
       try {
         const results = await API.getOne(id.id);
         let data = results.provider;
-        console.log(results, "data")
         setLoading(() => false);
         setState({
           name: data.name,
@@ -76,18 +74,12 @@ function AddProvider({ user, type, handleLogout }) {
   if (loading) {
     return (
       <>
-        <Nav user={user} handleLogout={handleLogout} />
         <Loading />
       </>
     );
   }
   return (
-    <Grid centered>
-      <Grid.Row>
-        <Grid.Column>
-          <Nav user={user} handleLogout={handleLogout} />
-        </Grid.Column>
-      </Grid.Row>
+    <>
       <Grid.Row>
         <Grid.Column style={{ maxWidth: 600 }}>
           <Segment>
@@ -120,7 +112,7 @@ function AddProvider({ user, type, handleLogout }) {
         </Grid.Column>
 
       </Grid.Row>
-    </Grid>
+    </>
   )
 }
 

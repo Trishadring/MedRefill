@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
+import { Grid } from "semantic-ui-react";
 import "./App.css";
 import SignupPage from "../SignupPage/SignupPage";
 import LoginPage from "../LoginPage/LoginPage";
@@ -10,6 +11,7 @@ import Medication from '../Medication/Medication'
 import MedicationUpdate from '../MedicationUpdate/MedicationUpdate'
 import ProfilePage from '../ProfilePage/ProfilePage'
 import { useNavigate } from "react-router-dom";
+import Nav from '../../components/Nav/Nav'
 
 
 
@@ -27,17 +29,24 @@ function App() {
 
   if (user) {
     return (
-      <Routes>
-        <Route path="/" element={<Feed user={user} handleLogout={handleLogout} />} />
-        <Route path="/:username" element={<ProfilePage user={user} handleLogout={handleLogout} />} />
-        <Route path="/Doctor" element={< AddProvider user={user} handleLogout={handleLogout} type="Doctor" />} />
-        <Route path="/Doctor/edit/:id" element={< AddProvider user={user} handleLogout={handleLogout} type="Doctor" />} />
-        <Route path="/Pharmacy" element={< AddProvider user={user} handleLogout={handleLogout} type="Pharmacy" />} />
-        <Route path="/Pharmacy/edit/:id" element={< AddProvider user={user} handleLogout={handleLogout} type="Pharmacy" />} />
-        <Route path="/medication/:medId" element={< Medication user={user} handleLogout={handleLogout} />} />
-        <Route path="/medication/:medId/edit" element={< MedicationUpdate user={user} handleLogout={handleLogout} />} />
-        <Route path="/logout" element={<LoginPage handleSignUpOrLogin={handleSignUpOrLogin} />} />
-      </Routes>
+      <Grid centered>
+        <Grid.Row>
+          <Grid.Column>
+            <Nav user={user} handleLogout={handleLogout} />
+          </Grid.Column>
+        </Grid.Row>
+        <Routes>
+          <Route path="/" element={<Feed />} />
+          <Route path="/:username" element={<ProfilePage user={user} />} />
+          <Route path="/Doctor" element={< AddProvider user={user} type="Doctor" />} />
+          <Route path="/Doctor/edit/:id" element={< AddProvider user={user} type="Doctor" />} />
+          <Route path="/Pharmacy" element={< AddProvider user={user} type="Pharmacy" />} />
+          <Route path="/Pharmacy/edit/:id" element={< AddProvider user={user} type="Pharmacy" />} />
+          <Route path="/medication/:medId" element={< Medication user={user} />} />
+          <Route path="/medication/:medId/edit" element={< MedicationUpdate user={user} />} />
+          <Route path="/logout" element={<LoginPage handleSignUpOrLogin={handleSignUpOrLogin} />} />
+        </Routes>
+      </Grid >
     );
   }
 

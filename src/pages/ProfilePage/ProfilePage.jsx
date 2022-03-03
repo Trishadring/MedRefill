@@ -25,7 +25,6 @@ export default function ProfilePage(props) {
     async function getProfile() {
       try {
         const data = await userService.getProfile(username);
-        console.log(data);
         setLoading(() => false);
         setDoctors(() => data.doctors);
         setPharmacies(() => data.pharmacies);
@@ -42,7 +41,6 @@ export default function ProfilePage(props) {
   if (loading) {
     return (
       <>
-        <Nav handleLogout={props.handleLogout} user={props.user} />
         <Loading />
       </>
     );
@@ -51,19 +49,13 @@ export default function ProfilePage(props) {
   if (error) {
     return (
       <>
-        <Nav handleLogout={props.handleLogout} user={props.user} />
         <ErrorMessage error={error} />;
       </>
     );
   }
 
   return (
-    <Grid>
-      <Grid.Row>
-        <Grid.Column>
-          <Nav handleLogout={props.handleLogout} user={props.user} />
-        </Grid.Column>
-      </Grid.Row>
+    <>
       <Grid.Row>
         <Grid.Column>
           <ProfileBio user={user} />
@@ -75,6 +67,6 @@ export default function ProfilePage(props) {
 
         </Grid.Column>
       </Grid.Row>
-    </Grid>
+    </>
   );
 }

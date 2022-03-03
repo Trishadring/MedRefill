@@ -27,19 +27,12 @@ export default function Feed({ user, handleLogout }) {
   if (loading) {
     return (
       <>
-        <Nav user={user} handleLogout={handleLogout} />
         <Loading />
       </>
     );
   }
   return (
-
-    <Grid centered>
-      <Grid.Row>
-        <Grid.Column>
-          <Nav user={user} handleLogout={handleLogout} />
-        </Grid.Column>
-      </Grid.Row>
+    <>
       <Grid.Row>
         <Grid.Column style={{ maxWidth: 800 }}>
           <MedFeed medication={meds} user={user} loading={loading} />
@@ -50,12 +43,7 @@ export default function Feed({ user, handleLogout }) {
           <AddMedForm setReRender={setReRender} />
         </Grid.Column>
       </Grid.Row>
-    </Grid>
-
-
-
-
-
+    </>
   )
 
 }
